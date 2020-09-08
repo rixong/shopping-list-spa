@@ -1,7 +1,8 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './custom.css'
+import './custom.css';
+import './fresca.css';
 
 import App from './components/App'
 
