@@ -6,11 +6,11 @@ import { updateList } from '../actions';
 
 const AddItems = ({ updateList }) => {
 
-  const [queryTerm, setQueryTerm] = useState({ name: '', quantity: '', active: true })
+  const [queryTerm, setQueryTerm] = useState({ name: '', quantity: '', category: 0, active: true })
   const [searchResults, setSearchResults] = useState([]);
 
   const onHandleChange = (e) => {
-    console.log(e.target.value)
+    // console.log(e.target.value)
     setQueryTerm({ ...queryTerm, [e.target.name]: e.target.value })
     if (e.target.value !== '') {
       setSearchResults(store.filter(item => item.name.includes(e.target.value)));
@@ -28,11 +28,16 @@ const AddItems = ({ updateList }) => {
   }
 
   const onClickSubmit = () => {
+    if(queryTerm.category === 0) {
+      console.log("Choose a category!")
+      return;
+    }
+
     updateList(queryTerm);
     if (!store.find(item => item === queryTerm.name)) {
       store.push({name: queryTerm.name, category: queryTerm.category})
     }
-    setQueryTerm({ name: '', quantity: '' });
+    setQueryTerm({ name: '', quantity: '', category: 0 });
   }
 
   return (
@@ -70,6 +75,7 @@ const AddItems = ({ updateList }) => {
             id="category-select"
             value={queryTerm.category}
             >
+            <option value="0">Category...</option>
             <option value="1">Produce</option>
             <option value="2">Meat</option>
             <option value="3">Dairy</option>
@@ -88,7 +94,7 @@ const AddItems = ({ updateList }) => {
           </div>
 
         </div>
-        <ul className="list-group-flush">
+        <ul className="list-group-flush itemSearchList">
           {searchResults ?
             searchResults.map((item, idx) =>
               <li

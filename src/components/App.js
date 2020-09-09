@@ -8,7 +8,7 @@ const App = () => {
 
     <div className="container">
       <Navbar />
-      <div className="row shadow mt-4">
+      <div className="row shadow mt-4 pb-5">
         <div className="col-sm-8 border-right">
           <AddItems/>
         </div>

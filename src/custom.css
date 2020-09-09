@@ -5,3 +5,9 @@
 /* #quantity-input {
   width:25%;
 } */
+
+.itemSearchList {
+  width: 200px;
+  margin-left:0;
+  padding-left:0;
+}
