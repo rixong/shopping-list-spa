@@ -9,10 +9,10 @@ const App = () => {
     <div className="container">
       <Navbar />
       <div className="row mt-4">
-        <div className="col">
+        <div className="col-8">
           <AddItems/>
         </div>
-        <div className="col">
+        <div className="col-4 bg-alert">
           <CurrentList/>
         </div>
       </div>
