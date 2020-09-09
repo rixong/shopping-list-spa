@@ -1,7 +1,9 @@
 /// REDUCERS
 
+import {list} from '../seed';
+
 export default function shoppingListReducer(
-  state = { curList: [] },
+  state = { curList: list },
   action
 ) {
   // console.log('From reducer', action)

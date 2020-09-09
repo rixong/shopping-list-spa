@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
 
-const CurrentList = () => {
+import ListItem from './ListItem'
+
+const CurrentList = ({ curList }) => {
+
+
   return (
-    <div className="display-4 text-center text-primary">My List</div>
+    <Fragment>
+      <div className="display-4 text-center text-primary mb-4">My List</div>
+      <ul className="list-group">
+        {curList.map(item => <ListItem item={item}/>)}
+      </ul>
+    </Fragment>
   )
 }
-export default CurrentList;
+
+const mapStateToProps = state => {
+  return {
+    curList: state.curList
+  }
+};
+
+export default connect(mapStateToProps)(CurrentList);

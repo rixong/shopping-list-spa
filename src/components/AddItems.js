@@ -6,7 +6,7 @@ import {updateList} from '../actions';
 
 const AddItems = ({updateList}) => {
 
-  const [queryTerm, setQueryTerm] = useState({ item: '', quantity: '' })
+  const [queryTerm, setQueryTerm] = useState({ name: '', quantity: '' })
   const [searchResults, setSearchResults] = useState([]);
 
   const onHandleChange = (e) => {
@@ -21,13 +21,16 @@ const AddItems = ({updateList}) => {
 
   const onClickItem = (e) => {
     // console.log(e.target.textContent)
-    setQueryTerm({ ...queryTerm, item: e.target.textContent })
+    setQueryTerm({ ...queryTerm, name: e.target.textContent })
     setSearchResults('');
   }
 
   const onClickSubmit = () => {
-    updateList(queryTerm)
-    setQueryTerm({item:'', quantity:''});
+    updateList(queryTerm);
+    if (!store.find(item => item === queryTerm.name)){
+      store.push(queryTerm.name)
+    }
+    setQueryTerm({name:'', quantity:''});
   }
 
   return (
@@ -37,13 +40,13 @@ const AddItems = ({updateList}) => {
         <div className="input-group">
           <input
             className="form-control"
-            id="item-input"
+            id="name-input"
             type="text"
             placeholder="Search for item..."
-            value={queryTerm.item}
+            value={queryTerm.name}
             onChange={(e) => onHandleChange(e)}
-            name="item"
-            aria-label="enter item"
+            name="name"
+            aria-label="enter item name"
             required
             ></input>
           <input
