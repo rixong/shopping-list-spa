@@ -1,4 +1,4 @@
-store = [
+export const store = [
   'apples',
   'pears',
   'berries',
