@@ -5,12 +5,15 @@ import ListItem from './ListItem'
 
 const CurrentList = ({ curList }) => {
 
+  const sortList = () => {
+    return curList.sort((a,b) => a.category - b.category)
+  }
 
   return (
     <Fragment>
       <div className="display-4 text-center text-primary mb-4">My List</div>
       <ul className="list-group">
-        {curList.map((item, idx) => <ListItem item={item} key={idx}/>)}
+        {sortList().map((item, idx) => <ListItem item={item} key={idx}/>)}
       </ul>
     </Fragment>
   )

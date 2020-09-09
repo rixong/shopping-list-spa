@@ -2,15 +2,17 @@ import React from 'react';
 
 const ListItem = ({ item }) => {
 
-  const nameClassDefault = 'bg-secondary'
-  const nameClassFinal = item.active ?
-    `${nameClassDefault} text-dark`
-    : `${nameClassDefault} text-light strike`
+  // const nameClassDefault = 'bg-secondary'
+  // const nameClassFinal = item.active ?
+  //   `${nameClassDefault} text-dark`
+  //   : `${nameClassDefault} text-light strike`
 
   return (
     <li className="list-group-item">
-      <div className={nameClassFinal}>{item.name}</div>
-      {item.quantity}
+      <div className="row">
+        <div className="col h5">{item.name}</div>
+        <div className="col border-left">{item.quantity}</div>
+        </div>
     </li>
   )
 }
