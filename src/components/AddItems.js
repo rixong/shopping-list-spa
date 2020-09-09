@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { store } from '../seed';
+import {connect} from 'react-redux';
 
-const AddItems = () => {
+import {updateList} from '../actions';
+
+const AddItems = ({updateList}) => {
 
   const [queryTerm, setQueryTerm] = useState({ item: '', quantity: '' })
   const [searchResults, setSearchResults] = useState([]);
-  const [myList, setMyList] = useState([]);
 
   const onHandleChange = (e) => {
-    console.log(e.target.value)
+    // console.log(e.target.value)
     setQueryTerm({ ...queryTerm, [e.target.name]: e.target.value })
     if (e.target.value !== '') {
       setSearchResults(store.filter(item => item.includes(e.target.value)));
@@ -18,15 +20,14 @@ const AddItems = () => {
   }
 
   const onClickItem = (e) => {
-    console.log(e.target.textContent)
+    // console.log(e.target.textContent)
     setQueryTerm({ ...queryTerm, item: e.target.textContent })
     setSearchResults('');
   }
 
   const onClickSubmit = () => {
-    setMyList([...myList.concat(queryTerm)]);
+    updateList(queryTerm)
     setQueryTerm({item:'', quantity:''});
-    console.log(myList);
   }
 
   return (
@@ -61,7 +62,7 @@ const AddItems = () => {
               type="button"
               id="button-addon2"
               onClick={onClickSubmit}
-            >Submit</button>
+            >Add item</button>
           </div>
 
         </div>
@@ -81,4 +82,4 @@ const AddItems = () => {
   )
 }
 
-export default AddItems;
+export default connect(null, {updateList})(AddItems);
