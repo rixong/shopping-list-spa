@@ -1,36 +1,38 @@
 import React, { useState } from 'react';
 import { store } from '../seed';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {updateList} from '../actions';
+import { updateList } from '../actions';
 
-const AddItems = ({updateList}) => {
+const AddItems = ({ updateList }) => {
 
-  const [queryTerm, setQueryTerm] = useState({ name: '', quantity: '' })
+  const [queryTerm, setQueryTerm] = useState({ name: '', quantity: '', active: true })
   const [searchResults, setSearchResults] = useState([]);
 
   const onHandleChange = (e) => {
-    // console.log(e.target.value)
+    console.log(e.target.value)
     setQueryTerm({ ...queryTerm, [e.target.name]: e.target.value })
     if (e.target.value !== '') {
-      setSearchResults(store.filter(item => item.includes(e.target.value)));
+      setSearchResults(store.filter(item => item.name.includes(e.target.value)));
     } else {
       setSearchResults('');
     }
   }
 
-  const onClickItem = (e) => {
-    // console.log(e.target.textContent)
-    setQueryTerm({ ...queryTerm, name: e.target.textContent })
+  const onSelectItem = (e) => {
+    console.log(e.target.textContent)
+    const item = store.find(item => item.name === e.target.textContent);
+    console.log(item)
+    setQueryTerm({...queryTerm, name: item.name, category: item.category})
     setSearchResults('');
   }
 
   const onClickSubmit = () => {
     updateList(queryTerm);
-    if (!store.find(item => item === queryTerm.name)){
-      store.push(queryTerm.name)
+    if (!store.find(item => item === queryTerm.name)) {
+      store.push({name: queryTerm.name, category: queryTerm.category})
     }
-    setQueryTerm({name:'', quantity:''});
+    setQueryTerm({ name: '', quantity: '' });
   }
 
   return (
@@ -48,7 +50,8 @@ const AddItems = ({updateList}) => {
             name="name"
             aria-label="enter item name"
             required
-            ></input>
+          ></input>
+
           <input
             className="form-control"
             id="quantity-input"
@@ -59,6 +62,22 @@ const AddItems = ({updateList}) => {
             aria-label="enter quantity"
             name="quantity"
           ></input>
+
+          <select 
+            className="form-control" 
+            onChange={(e) => onHandleChange(e)} 
+            name="category" 
+            id="category-select"
+            value={queryTerm.category}
+            >
+            <option value="1">Produce</option>
+            <option value="2">Meat</option>
+            <option value="3">Dairy</option>
+            <option value="4">Bakery</option>
+            <option value="5">Housewares</option>
+          </select>
+
+
           <div className="input-group-append">
             <button
               className="btn btn-outline-primary"
@@ -76,8 +95,8 @@ const AddItems = ({updateList}) => {
                 key={idx}
                 className="list-group-item role"
                 role="button"
-                onClick={onClickItem}
-              >{item}</li>)
+                onClick={(e) => onSelectItem(e)}
+              >{item.name}</li>)
             : null}
         </ul>
       </form>
@@ -85,4 +104,4 @@ const AddItems = ({updateList}) => {
   )
 }
 
-export default connect(null, {updateList})(AddItems);
+export default connect(null, { updateList })(AddItems);

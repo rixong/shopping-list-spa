@@ -10,7 +10,7 @@ const CurrentList = ({ curList }) => {
     <Fragment>
       <div className="display-4 text-center text-primary mb-4">My List</div>
       <ul className="list-group">
-        {curList.map(item => <ListItem item={item}/>)}
+        {curList.map((item, idx) => <ListItem item={item} key={idx}/>)}
       </ul>
     </Fragment>
   )
