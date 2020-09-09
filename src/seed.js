@@ -28,5 +28,10 @@ export const list = [
   {name: 'lettuce', quantity: '3 heads', category: 1, active: true},
   {name: 'cream cheese', quantity: '1 - 8 oz.package', category: 2,active: true},
   {name: 'milk', quantity: '1 quart', category: 2, active: false},
-  {name: 'mop', quantity: '1', category: 6, active: false}
+  {name: 'cheddar cheese', quantity: '16 oz.', category: 2, active: true},
+  {name: 'muffins', quantity: '1 dozen', category: 4, active: true},
+  {name: 'sourdough bread', quantity: '1 loaf', category: 4, active: true},
+  {name: 'corn', quantity: '3 ears', category: 1, active: true},
+  {name: 'berries', quantity: '1 lb.', category: 1, active: true},
+  {name: 'pears', quantity: '4', category: 1, active: true}
 ]

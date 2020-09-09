@@ -6,23 +6,29 @@ import ListGroup from './ListGroup'
 const CurrentList = ({ curList }) => {
 
   const sortList = () => {
-    const sorted = {};
-    for(let item of curList){
-      if(!sorted[item.category]){
-        sorted[item.category] = [];
+
+    const sorted = {}
+    const divs = [];
+    curList.forEach(item => {
+      if (!sorted[item.category]) {
+        sorted[item.category] = [item];
+      } else {
+        sorted[item.category].push(item);
       }
-      sorted[item.category].push(item);
+    })
+
+    for (let group in sorted) {
+      divs.push(<ListGroup category={group} items={sorted[group]} key={group} />);
     }
-    console.log('sorted', sorted)
-    return sorted;
+
+    // console.log('divs', divs)
+    return divs;
   }
 
   return (
     <Fragment>
       <div className="display-4 text-center text-primary mb-4">My List</div>
-      <ul className="list-group">
-        { sortList().forEach(group => <ListGroup group={group}/> )}
-      </ul>
+      {sortList()}
     </Fragment>
   )
 }

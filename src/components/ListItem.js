@@ -10,7 +10,7 @@ const ListItem = ({ item }) => {
   return (
     <li className="list-group-item">
       <div className="row">
-        <div className="col h5">{item.name}</div>
+        <div className="col">{item.name}</div>
         <div className="col border-left">{item.quantity}</div>
         </div>
     </li>
