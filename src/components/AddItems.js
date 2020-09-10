@@ -4,13 +4,18 @@ import { connect } from 'react-redux';
 
 import { updateList } from '../actions';
 
-const AddItems = ({ updateList }) => {
+/// TODO - block duplicate entries
+// new items to LowerCase
 
-  const [queryTerm, setQueryTerm] = useState({ name: '', quantity: '', category: 0, active: true })
+const AddItems = ({ updateList, curList }) => {
+
+  const queryDefault = { name: '', quantity: '', category: 0, active: true }
+
+  const [queryTerm, setQueryTerm] = useState(queryDefault)
   const [searchResults, setSearchResults] = useState([]);
 
   const onHandleChange = (e) => {
-    const value = e.target.name === 'category' ? parseInt(e.target.value, 10) : e.target.value;
+    let value = e.target.value
     setQueryTerm({ ...queryTerm, [e.target.name]: value})
     if (value !== '') {
       setSearchResults(store.filter(item => item.name.includes(value)));
@@ -23,20 +28,31 @@ const AddItems = ({ updateList }) => {
     console.log(e.target.textContent)
     const item = store.find(item => item.name === e.target.textContent);
     console.log(item)
-    setQueryTerm({...queryTerm, name: item.name, category: parseInt(item.category)})
+    setQueryTerm({...queryTerm, name: item.name, category: item.category})
     setSearchResults('');
   }
 
-  const onClickSubmit = () => {
+  const onClickSubmit = () => {   // DRY Fail!
     if(queryTerm.category === 0) {
       console.log("Choose a category!")
       return;
     }
+    if(!queryTerm.name.trim()) {
+      console.log('Enter an item!')
+      setQueryTerm(queryDefault);
+      return;
+    }
+    if(curList.find(item => item.name === queryTerm.name.trim())) {
+      console.log('Item already exists')
+      setQueryTerm(queryDefault);
+      return;
+    }
+
     updateList(queryTerm);
     if (!store.find(item => item === queryTerm.name)) {
-      store.push({name: queryTerm.name, category: parseInt(queryTerm.category)})
+      store.push({name: queryTerm.name, category: queryTerm.category})
     }
-    setQueryTerm({ name: '', quantity: '', category: 0 });
+    setQueryTerm({ queryDefault });
   }
 
   return (
@@ -109,4 +125,11 @@ const AddItems = ({ updateList }) => {
   )
 }
 
-export default connect(null, { updateList })(AddItems);
+const mapStateToProps = state => {
+  return {
+    curList: state.curList
+  }
+}
+
+
+export default connect(mapStateToProps, { updateList })(AddItems);
