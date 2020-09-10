@@ -4,6 +4,8 @@ import ListItem from './ListItem';
 
 
 const ListGroup = ({category, items}) => {
+
+  // console.log(items)
   return (
 
     <div className="bg-info" >

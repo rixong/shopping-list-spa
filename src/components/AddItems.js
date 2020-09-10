@@ -10,10 +10,10 @@ const AddItems = ({ updateList }) => {
   const [searchResults, setSearchResults] = useState([]);
 
   const onHandleChange = (e) => {
-    // console.log(e.target.value)
-    setQueryTerm({ ...queryTerm, [e.target.name]: e.target.value })
-    if (e.target.value !== '') {
-      setSearchResults(store.filter(item => item.name.includes(e.target.value)));
+    const value = e.target.name === 'category' ? parseInt(e.target.value, 10) : e.target.value.trim();
+    setQueryTerm({ ...queryTerm, [e.target.name]: value})
+    if (value !== '') {
+      setSearchResults(store.filter(item => item.name.includes(value)));
     } else {
       setSearchResults('');
     }
@@ -23,7 +23,7 @@ const AddItems = ({ updateList }) => {
     console.log(e.target.textContent)
     const item = store.find(item => item.name === e.target.textContent);
     console.log(item)
-    setQueryTerm({...queryTerm, name: item.name, category: item.category})
+    setQueryTerm({...queryTerm, name: item.name, category: parseInt(item.category)})
     setSearchResults('');
   }
 
@@ -32,10 +32,9 @@ const AddItems = ({ updateList }) => {
       console.log("Choose a category!")
       return;
     }
-
     updateList(queryTerm);
     if (!store.find(item => item === queryTerm.name)) {
-      store.push({name: queryTerm.name, category: queryTerm.category})
+      store.push({name: queryTerm.name, category: parseInt(queryTerm.category)})
     }
     setQueryTerm({ name: '', quantity: '', category: 0 });
   }

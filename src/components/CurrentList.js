@@ -4,21 +4,21 @@ import { connect } from 'react-redux';
 import ListGroup from './ListGroup'
 
 const CurrentList = ({ curList }) => {
-
+// console.log(curList)
   const sortList = () => {
 
-    const sorted = {}
+    // const sorted = {}
     const divs = [];
-    curList.forEach(item => {
-      if (!sorted[item.category]) {
-        sorted[item.category] = [item];
-      } else {
-        sorted[item.category].push(item);
-      }
-    })
+    // curList.forEach(item => {
+    //   if (!sorted[item.category]) {
+    //     sorted[item.category] = [item];
+    //   } else {
+    //     sorted[item.category].push(item);
+    //   }
+    // })
 
-    for (let group in sorted) {
-      divs.push(<ListGroup category={group} items={sorted[group]} key={group} />);
+    for (let group in curList) {
+      divs.push(<ListGroup category={group} items={curList[group]} key={group} />);
     }
 
     // console.log('divs', divs)
