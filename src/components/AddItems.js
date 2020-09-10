@@ -16,7 +16,7 @@ const AddItems = ({ updateList, curList }) => {
 
   const onHandleChange = (e) => {
     let value = e.target.value
-    setQueryTerm({ ...queryTerm, [e.target.name]: value})
+    setQueryTerm({ ...queryTerm, [e.target.name]: value.toLowerCase() })
     if (value !== '') {
       setSearchResults(store.filter(item => item.name.includes(value)));
     } else {
@@ -28,21 +28,21 @@ const AddItems = ({ updateList, curList }) => {
     console.log(e.target.textContent)
     const item = store.find(item => item.name === e.target.textContent);
     console.log(item)
-    setQueryTerm({...queryTerm, name: item.name, category: item.category})
+    setQueryTerm({ ...queryTerm, name: item.name, category: item.category })
     setSearchResults('');
   }
 
   const onClickSubmit = () => {   // DRY Fail!
-    if(queryTerm.category === 0) {
+    if (queryTerm.category === 0) {
       console.log("Choose a category!")
       return;
     }
-    if(!queryTerm.name.trim()) {
+    if (!queryTerm.name.trim()) {
       console.log('Enter an item!')
       setQueryTerm(queryDefault);
       return;
     }
-    if(curList.find(item => item.name === queryTerm.name.trim())) {
+    if (curList.find(item => item.name.toLowerCase() === queryTerm.name.trim().toLowerCase())) {
       console.log('Item already exists')
       setQueryTerm(queryDefault);
       return;
@@ -50,9 +50,9 @@ const AddItems = ({ updateList, curList }) => {
 
     updateList(queryTerm);
     if (!store.find(item => item === queryTerm.name)) {
-      store.push({name: queryTerm.name, category: queryTerm.category})
+      store.push({ name: queryTerm.name, category: queryTerm.category })
     }
-    setQueryTerm({ queryDefault });
+    setQueryTerm(queryDefault);
   }
 
   return (
@@ -83,13 +83,13 @@ const AddItems = ({ updateList, curList }) => {
             name="quantity"
           ></input>
 
-          <select 
-            className="form-control" 
-            onChange={(e) => onHandleChange(e)} 
-            name="category" 
+          <select
+            className="form-control"
+            onChange={(e) => onHandleChange(e)}
+            name="category"
             id="category-select"
             value={queryTerm.category}
-            >
+          >
             <option value="0">Category...</option>
             <option value="1">Produce</option>
             <option value="2">Meat</option>
