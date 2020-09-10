@@ -41,7 +41,7 @@ const AddItems = ({ updateList }) => {
 
   return (
     <React-fragment>
-      <div className="display-4 text-center text-dark mb-4">Add items</div>
+      <div className="display-4 text-center text-warning mb-4">Add items</div>
       <form>
         <div className="input-group">
           <input

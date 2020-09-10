@@ -12,7 +12,7 @@ const App = () => {
         <div className="col-sm-8 border-right">
           <AddItems/>
         </div>
-        <div className="col-sm-4 bg-alert">
+        <div className="col-sm-4 bg-light">
           <CurrentList/>
         </div>
       </div>

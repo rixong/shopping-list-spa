@@ -6,3 +6,10 @@ export const updateList = (listItem) => {
     payload: listItem
   }
 }
+
+export const changeStatus = (item) => {
+  return {
+    type: 'CHANGE_STATUS',
+    payload: item
+  }
+}
