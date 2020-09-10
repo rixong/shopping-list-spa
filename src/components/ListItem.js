@@ -6,7 +6,7 @@ import {changeStatus} from '../actions';
 const ListItem = ({ item, changeStatus }) => {
 
   const onHandleClick = () => {
-    console.log('Cloicked', item.name);
+    // console.log('Cloicked', item.name);
     changeStatus(item);
   }
 

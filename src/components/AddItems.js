@@ -10,7 +10,7 @@ const AddItems = ({ updateList }) => {
   const [searchResults, setSearchResults] = useState([]);
 
   const onHandleChange = (e) => {
-    const value = e.target.name === 'category' ? parseInt(e.target.value, 10) : e.target.value.trim();
+    const value = e.target.name === 'category' ? parseInt(e.target.value, 10) : e.target.value;
     setQueryTerm({ ...queryTerm, [e.target.name]: value})
     if (value !== '') {
       setSearchResults(store.filter(item => item.name.includes(value)));

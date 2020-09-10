@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import ListGroup from './ListGroup'
 
 const CurrentList = ({ curList }) => {
-// console.log(curList)
 
   const sortList = () => {
 
@@ -18,16 +17,19 @@ const CurrentList = ({ curList }) => {
       }
     })
 
-    for (let group in curList) {
-      divs.push(<ListGroup category={group} items={curList[group]} key={group} />);
+    // console.log(sorted)
+    
+    for (let group in sorted) {
+      divs.push(<ListGroup category={group} items={sorted[group]} key={group} />);
     }
+    // console.log(divs)
     return divs;
   }
 
   return (
     <Fragment>
       <div className="display-4 bg-info text-center text-dark mb-4">My List</div>
-      {/* {sortList()} */}
+      {sortList()}
     </Fragment>
   )
 }

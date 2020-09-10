@@ -3,40 +3,18 @@
 import { list } from '../seed';
 
 export default function shoppingListReducer(
-  state = { curList: [] },
+  state = { curList: [...list] },
   action
 ) {
   // console.log('From reducer', action)
-  let newList;
   switch (action.type) {
     case 'ADD_TO_LIST':
-      newList = {...state, ...state.curList}
-      console.log(newList)
-      return { ...state, curList: newList }
-
+      return { ...state, curList: state.curList.concat(action.payload) }
     case 'CHANGE_STATUS':
-
-      let idx = state.curList[action.payload.category].findIndex(item => item.name === action.payload.name)
-      action.payload.active = !action.payload.active
-      // console.log((
-      //   {...state, 
-      //   curList: {...state.curList,
-      //     [action.payload.category]: 
-      //       [...state.curList[action.payload.category].slice(0, idx),
-      //       action.payload,
-      //       ...state.curList[action.payload.category].slice(idx+1)]
-      //           }
-      //   }) === state
-      // )
-      return {...state, 
-        curList: {...state.curList,
-          [action.payload.category]: 
-            [...state.curList[action.payload.category].slice(0, idx),
-            action.payload,
-            ...state.curList[action.payload.category].slice(idx+1)]
-                }
-        }
-      
+      let idx = state.curList.findIndex(item => item.name === action.payload.name)
+      let tempItem = {...action.payload}
+      tempItem.active = !tempItem.active
+      return {...state, curList: [...state.curList.slice(0,idx),tempItem, ...state.curList.slice(idx+1)]} 
     default:
       return state
   }
