@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import { store } from '../seed';
 import { connect } from 'react-redux';
 
-import { updateList } from '../actions';
+import { updateList, addNotification } from '../actions';
 
-/// TODO - block duplicate entries
-// new items to LowerCase
-
-const AddItems = ({ updateList, curList }) => {
+const AddItems = ({ updateList, addNotification, curList }) => {
 
   const queryDefault = { name: '', quantity: '', category: 0, active: true }
 
@@ -34,17 +31,18 @@ const AddItems = ({ updateList, curList }) => {
 
   const onClickSubmit = () => {   // DRY Fail!
     if (queryTerm.category === 0) {
-      console.log("Choose a category!")
+      // console.log("Choose a category!")
+      addNotification("Choose a category!");
       return;
     }
     if (!queryTerm.name.trim()) {
-      console.log('Enter an item!')
+      addNotification('Enter an item!');
       setQueryTerm(queryDefault);
       return;
     }
     const trimmedName = queryTerm.name.trim().toLowerCase();
     if (curList.find(item => item.name.toLowerCase() === trimmedName)) {
-      console.log('Item already exists')
+      addNotification('Item already exists')
       setQueryTerm(queryDefault);
       return;
     }
@@ -55,7 +53,7 @@ const AddItems = ({ updateList, curList }) => {
     if (!store.find(item => item === trimmedName)) {
       store.push({ name: trimmedName, category: queryTerm.category })
     }
-    
+
     setQueryTerm(queryDefault);
   }
 
@@ -136,4 +134,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, { updateList })(AddItems);
+export default connect(mapStateToProps, { updateList, addNotification })(AddItems);

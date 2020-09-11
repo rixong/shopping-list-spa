@@ -20,3 +20,11 @@ export const removeFromMasterList = (item) => {
     payload: item
   }
 }
+
+export const addNotification = (message) => {
+  console.log("Add note")
+  return {
+    type: 'ADD_NOTIFICATION',
+    payload: {error: true, message}
+  }
+}

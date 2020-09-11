@@ -3,10 +3,10 @@
 import { list, store } from '../seed';
 
 export default function shoppingListReducer(
-  state = { curList: [...list], masterList: [...store] },
+  state = { curList: [...list], masterList: [...store], notification: { error: false, message: ''} },
   action
 ) {
-  // console.log('From reducer', action)
+  console.log('From reducer', action)
   let idx;
   switch (action.type) {
     case 'ADD_TO_LIST':
@@ -22,6 +22,8 @@ export default function shoppingListReducer(
         ...state, masterList:
           state.masterList.slice(0, idx).concat(state.masterList.slice(idx + 1))
       }
+      case 'ADD_NOTIFICATION':
+        return{...state, notification: action.payload}
     default:
       return state
   }
