@@ -18,7 +18,7 @@ const ListItem = ({ item, changeStatus }) => {
   return (
     <li className="list-group-item bg-secondary py-2" role="button" onClick={onHandleClick}>
       <div className={nameClassFinal}>
-        <div className="col">{item.name}</div>
+        <div className="col font-weight-bold">{item.name}</div>
         <div className="col border-left">{item.quantity}</div>
         </div>
     </li>

@@ -33,7 +33,13 @@ export const list = [
   {name: 'sourdough bread', quantity: '1 loaf', category: '4', active: true},
   {name: 'corn', quantity: '3 ears', category: '1', active: true},
   {name: 'berries', quantity: '1 lb.', category: '1', active: true},
-  {name: 'pears', quantity: '4', category: '1', active: true}
+  {name: 'pears', quantity: '4', category: '1', active: true},
+  {name: 'a', quantity: '4', category: '1', active: true},
+  {name: 's', quantity: '4', category: '1', active: true},
+  {name: 'd', quantity: '4', category: '1', active: true},
+  {name: 'f', quantity: '4', category: '1', active: true},
+  {name: 'g', quantity: '4', category: '1', active: true},
+  {name: 'h', quantity: '4', category: '1', active: true}
 ]
 
 // export const list = {

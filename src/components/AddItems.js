@@ -42,16 +42,20 @@ const AddItems = ({ updateList, curList }) => {
       setQueryTerm(queryDefault);
       return;
     }
-    if (curList.find(item => item.name.toLowerCase() === queryTerm.name.trim().toLowerCase())) {
+    const trimmedName = queryTerm.name.trim().toLowerCase();
+    if (curList.find(item => item.name.toLowerCase() === trimmedName)) {
       console.log('Item already exists')
       setQueryTerm(queryDefault);
       return;
     }
 
-    updateList(queryTerm);
-    if (!store.find(item => item === queryTerm.name)) {
-      store.push({ name: queryTerm.name, category: queryTerm.category })
+    updateList(queryTerm);  //Action
+
+    // Add to master list if not yet present.
+    if (!store.find(item => item === trimmedName)) {
+      store.push({ name: trimmedName, category: queryTerm.category })
     }
+    
     setQueryTerm(queryDefault);
   }
 

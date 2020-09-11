@@ -13,3 +13,10 @@ export const changeStatus = (item) => {
     payload: item
   }
 }
+
+export const removeFromMasterList = (item) => {
+  return {
+    type: 'REMOVE_FROM_MASTER_LIST',
+    payload: item
+  }
+}
