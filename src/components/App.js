@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 
 
@@ -11,6 +11,13 @@ import Alert from './Alert';
 const App = ({ notification }) => {
 
   const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+
+  useEffect (() => {
+    
+
+
+  }, [])
+
 
   return (
 

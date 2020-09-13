@@ -1,4 +1,13 @@
+import axios from 'axios';
+const baseURL = 'http://localhost:3000/api/v1'
+
 // ACTIONS
+
+export const getUser = (uderId) => {
+
+}
+
+
 export const updateList = (listItem) => {
   // console.log('from Action', listItem)
   return {
