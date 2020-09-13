@@ -3,8 +3,13 @@ const baseURL = 'http://localhost:3000/api/v1'
 
 // ACTIONS
 
-export const getUser = (uderId) => {
-
+export const getUser = () => async dispatch => {
+  const response =  (await axios.get(`${baseURL}/users/1`)).data
+  console.log(response);
+  return {
+    type: 'GET_USER',
+    payload: response
+  }
 }
 
 

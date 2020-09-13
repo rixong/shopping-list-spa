@@ -7,14 +7,14 @@ import AddItems from './AddItems';
 import CurrentList from './CurrentList';
 import EditMasterList from './EditMasterList';
 import Alert from './Alert';
+import { getUser } from '../actions';
 
-const App = ({ notification }) => {
+const App = ({ notification, getUser }) => {
 
   const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
 
   useEffect (() => {
-    
-
+    getUser()
 
   }, [])
 
@@ -29,7 +29,7 @@ const App = ({ notification }) => {
           {notification.error ? <Alert /> : null}
         </div>
         <div className="col-sm-4 bg-light overflow-auto" style={{ height: vh }}>
-          <CurrentList />
+          {/* <CurrentList /> */}
         </div>
       </div>
       <EditMasterList />
@@ -43,4 +43,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, {getUser})(App);

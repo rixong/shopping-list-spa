@@ -1,14 +1,21 @@
 /// REDUCERS
 
-import { list, store } from '../seed';
 
 export default function shoppingListReducer(
-  state = { curList: [...list], masterList: [...store], notification: { error: false, message: ''} },
+  state = { 
+    curUser: null,
+    curList: {},
+    curListItems: [],
+    masterList: [], 
+    notification: { error: false, message: ''} },
   action
 ) {
   console.log('From reducer', action)
   let idx;
   switch (action.type) {
+    case 'GET_USER':
+      return {...state, curList: action.payload.curList, curListItems: action.payload.items}
+
     case 'ADD_TO_LIST':
       return { ...state, curList: state.curList.concat(action.payload) }
     case 'CHANGE_STATUS':
