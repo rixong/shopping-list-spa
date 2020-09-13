@@ -3,12 +3,15 @@ import {connect} from 'react-redux';
 import {changeStatus} from '../actions';
 
 
-const ListItem = ({ item, changeStatus }) => {
+const ListItem = ({ item, changeStatus, masterList }) => {
 
   const onHandleClick = () => {
-    // console.log('Cloicked', item.name);
+    // console.log('Clicked', item.name);
     changeStatus(item);
   }
+
+  const name = masterList.find(el => item.item_id === el.id).name
+  // console.log(name)
 
   const nameClassDefault = 'row'
   const nameClassFinal = item.active ?
@@ -18,11 +21,17 @@ const ListItem = ({ item, changeStatus }) => {
   return (
     <li className="list-group-item bg-secondary py-2" role="button" onClick={onHandleClick}>
       <div className={nameClassFinal}>
-        <div className="col font-weight-bold">{item.name}</div>
+        <div className="col font-weight-bold">{name}</div>
         <div className="col border-left">{item.quantity}</div>
         </div>
     </li>
   )
 }
 
-export default connect(null, {changeStatus} )(ListItem);
+const mapStateToProps = state => {
+  return {
+    masterList: state.masterList
+  }
+};
+
+export default connect(mapStateToProps, {changeStatus} )(ListItem);

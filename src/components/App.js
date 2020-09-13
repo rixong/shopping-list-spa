@@ -29,10 +29,10 @@ const App = ({ notification, getUser }) => {
           {notification.error ? <Alert /> : null}
         </div>
         <div className="col-sm-4 bg-light overflow-auto" style={{ height: vh }}>
-          {/* <CurrentList /> */}
+          <CurrentList />
         </div>
       </div>
-      <EditMasterList />
+      {/* <EditMasterList /> */}
     </div>
   )
 }

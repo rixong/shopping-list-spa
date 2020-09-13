@@ -2,18 +2,21 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import ListGroup from './ListGroup'
+import { isEmptyObject } from 'jquery';
 
-const CurrentList = ({ curList }) => {
+const CurrentList = ({ curListItems, masterList, categories }) => {
 
   const sortList = () => {
 
     const sorted = {}
     const divs = [];
-    curList.forEach(item => {
-      if (!sorted[item.category]) {
-        sorted[item.category] = [item];
+    curListItems.forEach(listItem => {
+      let item = masterList.find(el => listItem.item_id === el.id)
+
+      if (!sorted[item.category_id]) {
+        sorted[item.category_id] = [listItem];
       } else {
-        sorted[item.category].push(item);
+        sorted[item.category_id].push(listItem);
       }
     })
 
@@ -36,7 +39,9 @@ const CurrentList = ({ curList }) => {
 
 const mapStateToProps = state => {
   return {
-    curList: state.curList
+    curListItems: state.curListItems, 
+    masterList: state.masterList, 
+    categories: state.categories
   }
 };
 

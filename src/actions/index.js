@@ -5,11 +5,11 @@ const baseURL = 'http://localhost:3000/api/v1'
 
 export const getUser = () => async dispatch => {
   const response =  (await axios.get(`${baseURL}/users/1`)).data
-  console.log(response);
-  return {
+  // console.log(response);
+  dispatch ({
     type: 'GET_USER',
     payload: response
-  }
+  })
 }
 
 
