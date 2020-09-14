@@ -13,17 +13,24 @@ export const getUser = () => async dispatch => {
 }
 
 
-export const updateList = (listItem) => {
+export const addItem = (listItem) => {
   // console.log('from Action', listItem)
   return {
-    type: 'ADD_TO_LIST',
+    type: 'ADDED_ITEM',
     payload: listItem
+  }
+}
+
+export const addItemToMasterList = (item) => {
+  return {
+    type: 'ADDED_ITEM_TO_MASTERLIST',
+    pahyload: item
   }
 }
 
 export const changeStatus = (item) => {
   return {
-    type: 'CHANGE_STATUS',
+    type: 'CHANGED_STATUS',
     payload: item
   }
 }
@@ -38,7 +45,7 @@ export const removeFromMasterList = (item) => {
 export const addNotification = (message) => {
   console.log("Add note")
   return {
-    type: 'ADD_NOTIFICATION',
+    type: 'ADDED_NOTIFICATION',
     payload: {error: true, message}
   }
 }

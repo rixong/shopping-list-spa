@@ -23,9 +23,10 @@ export default function shoppingListReducer(
         categories: action.payload.categories,
       }
 
-    case 'ADD_TO_LIST':
-      return { ...state, curList: state.curList.concat(action.payload) }
-    case 'CHANGE_STATUS':
+    case 'ADDED_ITEM':
+      return { ...state, curListItems: state.curListItems.concat(action.payload) }
+
+    case 'CHANGED_STATUS':
       idx = state.curListItems.findIndex(item => item.item_id === action.payload.item_id)
       let tempItem = { ...action.payload }
       tempItem.active = !tempItem.active
@@ -37,7 +38,7 @@ export default function shoppingListReducer(
         ...state, masterList:
           state.masterList.slice(0, idx).concat(state.masterList.slice(idx + 1))
       }
-      case 'ADD_NOTIFICATION':
+      case 'ADDED_NOTIFICATION':
         return{...state, notification: action.payload}
     default:
       return state

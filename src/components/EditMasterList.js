@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {removeFromMasterList} from '../actions';
 
-const EditMasterList = ({ masterList, removeFromMasterList }) => {
+const EditMasterList = ({ masterList, categories, removeFromMasterList }) => {
 
   // const handleDeleteClick = () => {
   //   console.log("here")
@@ -12,11 +12,11 @@ const EditMasterList = ({ masterList, removeFromMasterList }) => {
     <div className="row justify-content-center">
       <ul className="list-group" >
         {masterList.sort((a, b) => a.name.localeCompare(b.name))
-          .map((item, idx) => (
+          .map((item) => (
             <li
               className="list-group-item"
-              key={idx}>{
-              item.name}
+              key={item.id}>
+                {item.name} - {(categories.find(el => el.id === item.category_id)).name}
               <button 
                 type="button" 
                 className="close" 
@@ -34,7 +34,8 @@ const EditMasterList = ({ masterList, removeFromMasterList }) => {
 
 const mapStateToProps = state => {
   return {
-    masterList: state.masterList
+    masterList: state.masterList,
+    categories: state.categories
   }
 };
 

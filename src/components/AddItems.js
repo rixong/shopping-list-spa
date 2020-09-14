@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { store } from '../seed';
 import { connect } from 'react-redux';
 
-import { updateList, addNotification } from '../actions';
+import { addItem, addItemToMasterList, addNotification } from '../actions';
 
-const AddItems = ({ updateList, addNotification, curList }) => {
+const AddItems = ({ addItem, addItemToMasterList, addNotification, curItemsList, masterList }) => {
 
   const queryDefault = { name: '', quantity: '', category: 0, active: true }
 
@@ -15,17 +14,16 @@ const AddItems = ({ updateList, addNotification, curList }) => {
     let value = e.target.value
     setQueryTerm({ ...queryTerm, [e.target.name]: value.toLowerCase() })
     if (value !== '') {
-      setSearchResults(store.filter(item => item.name.includes(value)));
+      setSearchResults(masterList.filter(item => item.name.includes(value)));
     } else {
       setSearchResults('');
     }
   }
 
   const onSelectItem = (e) => {
-    console.log(e.target.textContent)
-    const item = store.find(item => item.name === e.target.textContent);
+    const item = masterList.find(item => item.name === e.target.textContent);
     console.log(item)
-    setQueryTerm({ ...queryTerm, name: item.name, category: item.category })
+    setQueryTerm({ ...queryTerm, name: item.name, category: item.category_id })
     setSearchResults('');
   }
 
@@ -41,17 +39,17 @@ const AddItems = ({ updateList, addNotification, curList }) => {
       return;
     }
     const trimmedName = queryTerm.name.trim().toLowerCase();
-    if (curList.find(item => item.name.toLowerCase() === trimmedName)) {
+    if (curItemsList.find(item => item.name.toLowerCase() === trimmedName)) {
       addNotification('Item already exists')
       setQueryTerm(queryDefault);
       return;
     }
 
-    updateList(queryTerm);  //Action
+    addItem(queryTerm);  //Action
 
     // Add to master list if not yet present.
-    if (!store.find(item => item === trimmedName)) {
-      store.push({ name: trimmedName, category: queryTerm.category })
+    if (!masterList.find(item => item.name === trimmedName)) {
+      addItemToMasterList()
     }
 
     setQueryTerm(queryDefault);
@@ -113,12 +111,13 @@ const AddItems = ({ updateList, addNotification, curList }) => {
         </div>
         <ul className="list-group-flush itemSearchList">
           {searchResults ?
-            searchResults.map((item, idx) =>
+            searchResults.map((item) =>
               <li
-                key={idx}
+                key={item.id}
                 className="list-group-item role"
                 role="button"
                 onClick={(e) => onSelectItem(e)}
+                data-id={item.id}
               >{item.name}</li>)
             : null}
         </ul>
@@ -129,9 +128,10 @@ const AddItems = ({ updateList, addNotification, curList }) => {
 
 const mapStateToProps = state => {
   return {
-    curList: state.curList
+    curList: state.curList,
+    masterList: state.masterList
   }
 }
 
 
-export default connect(mapStateToProps, { updateList, addNotification })(AddItems);
+export default connect(mapStateToProps, { addItem, addNotification, addItemToMasterList })(AddItems);

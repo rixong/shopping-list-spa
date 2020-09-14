@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Navbar from './Navbar';
 import AddItems from './AddItems';
 import CurrentList from './CurrentList';
-import EditMasterList from './EditMasterList';
+// import EditMasterList from './EditMasterList';
 import Alert from './Alert';
 import { getUser } from '../actions';
 

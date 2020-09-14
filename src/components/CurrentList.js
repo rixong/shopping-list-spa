@@ -2,9 +2,8 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import ListGroup from './ListGroup'
-import { isEmptyObject } from 'jquery';
 
-const CurrentList = ({ curListItems, masterList, categories }) => {
+const CurrentList = ({ curListItems, masterList, curList }) => {
 
   const sortList = () => {
 
@@ -31,7 +30,7 @@ const CurrentList = ({ curListItems, masterList, categories }) => {
 
   return (
     <Fragment>
-      <div className="display-4 bg-info text-center text-dark mb-4">My List</div>
+      <div className="h2 bg-info text-center text-dark mb-4">{curList.name}-{curList.created_at}</div>
       {sortList()}
     </Fragment>
   )
@@ -41,7 +40,7 @@ const mapStateToProps = state => {
   return {
     curListItems: state.curListItems, 
     masterList: state.masterList, 
-    categories: state.categories
+    curList: state.curList, 
   }
 };
 
