@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 
 import { addItem, addItemToMasterList, addNotification } from '../actions';
 
-const AddItems = ({ addItem, addItemToMasterList, addNotification, curItemsList, masterList }) => {
+const AddItems = ({ addItem, addItemToMasterList, addNotification, curListItems, masterList, curUser }) => {
 
-  const queryDefault = { name: '', quantity: '', category: 0, active: true }
+  const queryDefault = { name: '', quantity: '', category: 0 }
 
   const [queryTerm, setQueryTerm] = useState(queryDefault)
   const [searchResults, setSearchResults] = useState([]);
@@ -33,24 +33,26 @@ const AddItems = ({ addItem, addItemToMasterList, addNotification, curItemsList,
       addNotification("Choose a category!");
       return;
     }
+
     if (!queryTerm.name.trim()) {
       addNotification('Enter an item!');
       setQueryTerm(queryDefault);
       return;
     }
+
     const trimmedName = queryTerm.name.trim().toLowerCase();
-    if (curItemsList.find(item => item.name.toLowerCase() === trimmedName)) {
+    const masterItemId = masterList.filter(item => trimmedName === item.name).id // finds in master list
+    if (masterItemId && curListItems.find(item => item.item_id === masterItemId)) {
       addNotification('Item already exists')
       setQueryTerm(queryDefault);
       return;
     }
-
-    addItem(queryTerm);  //Action
-
     // Add to master list if not yet present.
-    if (!masterList.find(item => item.name === trimmedName)) {
-      addItemToMasterList()
+    if (!masterItemId) {
+      addItemToMasterList({name: trimmedName, category_id: parseInt(queryTerm.category,10), user_id: curUser.id});
     }
+
+    // addItem(queryTerm);  //Action
 
     setQueryTerm(queryDefault);
   }
@@ -128,7 +130,8 @@ const AddItems = ({ addItem, addItemToMasterList, addNotification, curItemsList,
 
 const mapStateToProps = state => {
   return {
-    curList: state.curList,
+    curUser: state.curUser,
+    curListItems: state.curListItems,
     masterList: state.masterList
   }
 }

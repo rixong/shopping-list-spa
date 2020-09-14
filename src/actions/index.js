@@ -24,7 +24,7 @@ export const addItem = (listItem) => {
 export const addItemToMasterList = (item) => {
   return {
     type: 'ADDED_ITEM_TO_MASTERLIST',
-    pahyload: item
+    payload: item
   }
 }
 
