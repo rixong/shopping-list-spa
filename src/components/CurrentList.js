@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import moment from 'moment';
 import { connect } from 'react-redux';
 
 import ListGroup from './ListGroup'
@@ -20,7 +21,7 @@ const CurrentList = ({ curListItems, masterList, curList }) => {
     })
 
     // console.log(sorted)
-    
+
     for (let group in sorted) {
       divs.push(<ListGroup category={group} items={sorted[group]} key={group} />);
     }
@@ -30,7 +31,10 @@ const CurrentList = ({ curListItems, masterList, curList }) => {
 
   return (
     <Fragment>
-      <div className="h2 bg-info text-center text-dark mb-4">{curList.name}-{curList.created_at}</div>
+      <div className="bg-info text-center text-dark mb-4">
+        <div className="h4 pt-3">{ curList.name } </div>
+        <div className="h6 pb-4">{ moment(curList.created_at).format('ddd, MMM Do') }</div>
+      </div>
       {sortList()}
     </Fragment>
   )
@@ -38,9 +42,9 @@ const CurrentList = ({ curListItems, masterList, curList }) => {
 
 const mapStateToProps = state => {
   return {
-    curListItems: state.curListItems, 
-    masterList: state.masterList, 
-    curList: state.curList, 
+    curListItems: state.curListItems,
+    masterList: state.masterList,
+    curList: state.curList,
   }
 };
 
