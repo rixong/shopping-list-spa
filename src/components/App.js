@@ -16,7 +16,7 @@ const App = ({ notification, getUser }) => {
   useEffect (() => {
     getUser()
 
-  }, [])
+  }, [getUser])
 
 
   return (
