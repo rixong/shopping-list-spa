@@ -47,6 +47,8 @@ export default function shoppingListReducer(
       }
     case 'ADDED_NOTIFICATION':
       return { ...state, notification: action.payload }
+    case 'CLEARED_NOTIFICATION':
+      return { ...state, notification: action.payload }
     default:
       return state
   }

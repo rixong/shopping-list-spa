@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { addItem, addItemToMasterList, addNotification } from '../actions';
+import { addItem, addItemToMasterList, addNotification, clearNotification } from '../actions';
 
-const AddItems = ({ addItem, addItemToMasterList, addNotification, curListItems, masterList, curUser }) => {
+const AddItems = ({
+  addItem, 
+  addItemToMasterList, 
+  addNotification, 
+  clearNotification, 
+  curListItems, 
+  masterList, 
+  curList, 
+  curUser 
+}) => {
 
   const queryDefault = { name: '', quantity: '', category: 0 }
 
@@ -11,6 +20,7 @@ const AddItems = ({ addItem, addItemToMasterList, addNotification, curListItems,
   const [searchResults, setSearchResults] = useState([]);
 
   const onHandleChange = (e) => {
+    clearNotification();
     let value = e.target.value
     setQueryTerm({ ...queryTerm, [e.target.name]: value.toLowerCase() })
     if (value !== '') {
@@ -22,14 +32,13 @@ const AddItems = ({ addItem, addItemToMasterList, addNotification, curListItems,
 
   const onSelectItem = (e) => {
     const item = masterList.find(item => item.name === e.target.textContent);
-    console.log(item)
+    // console.log(item)
     setQueryTerm({ ...queryTerm, name: item.name, category: item.category_id })
     setSearchResults('');
   }
 
   const onClickSubmit = () => {   // DRY Fail!
     if (queryTerm.category === 0) {
-      // console.log("Choose a category!")
       addNotification("Choose a category!");
       return;
     }
@@ -41,19 +50,28 @@ const AddItems = ({ addItem, addItemToMasterList, addNotification, curListItems,
     }
 
     const trimmedName = queryTerm.name.trim().toLowerCase();
-    const masterItemId = masterList.filter(item => trimmedName === item.name).id // finds in master list
+    const masterItemId = masterList.filter(item => trimmedName === item.name)[0].id // finds in master list
+
     if (masterItemId && curListItems.find(item => item.item_id === masterItemId)) {
       addNotification('Item already exists')
       setQueryTerm(queryDefault);
       return;
     }
+    console.log(masterItemId)
     // Add to master list if not yet present.
     if (!masterItemId) {
-      addItemToMasterList({name: trimmedName, category_id: parseInt(queryTerm.category,10), user_id: curUser.id});
+      addItemToMasterList({
+        name: trimmedName, 
+        category_id: queryTerm.category, 
+        quantity: queryTerm.category}, curUser.id, curList.id );
+    } else {
+      addItem(queryTerm);  //Action
+        setQueryTerm({
+          item_id: masterItemId,
+          list_id: curList.id,
+          quantity: queryTerm.quantity
+        });
     }
-
-    // addItem(queryTerm);  //Action
-
     setQueryTerm(queryDefault);
   }
 
@@ -131,10 +149,11 @@ const AddItems = ({ addItem, addItemToMasterList, addNotification, curListItems,
 const mapStateToProps = state => {
   return {
     curUser: state.curUser,
+    curList: state.curList,
     curListItems: state.curListItems,
     masterList: state.masterList
   }
 }
 
 
-export default connect(mapStateToProps, { addItem, addNotification, addItemToMasterList })(AddItems);
+export default connect(mapStateToProps, { addItem, addNotification, clearNotification, addItemToMasterList })(AddItems);
