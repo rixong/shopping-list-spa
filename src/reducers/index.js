@@ -12,10 +12,10 @@ export default function shoppingListReducer(
   },
   action
 ) {
-  console.log('From reducer', action)
+  // console.log('From reducer', action)
   let idx;
   switch (action.type) {
-    case 'GET_USER':
+    case 'GOT_USER':
       return {
         ...state,
         curUser: action.payload.user,
@@ -25,22 +25,24 @@ export default function shoppingListReducer(
         categories: action.payload.categories,
       }
 
-    case 'ADDED_ITEM':
+    case 'ADDED_ITEM_TO_CUR_LIST':
       return { ...state, curListItems: state.curListItems.concat(action.payload) }
+    case 'REMOVED_ITEMS_FROM_CUR_LIST':
+      let tempItem = [...state.curListItems].filter(item => item.item_id !== action.payload)
+      return {...state, curListItems: tempItem}
+
+    case 'CHANGED_STATUS':
+      idx = state.curListItems.findIndex(item => item.item_id === action.payload.item_id)
+      return {
+        ...state, curListItems:
+          [...state.curListItems.slice(0, idx), action.payload, ...state.curListItems.slice(idx + 1)]
+      }
 
     case 'ADDED_ITEM_TO_MASTERLIST':
       return { ...state, masterList: state.masterList.concat(action.payload) }
 
-    case 'CHANGED_STATUS':
-      idx = state.curListItems.findIndex(item => item.item_id === action.payload.item_id)
-      let tempItem = { ...action.payload }
-      tempItem.active = !tempItem.active
-      return {
-        ...state, curListItems:
-          [...state.curListItems.slice(0, idx), tempItem, ...state.curListItems.slice(idx + 1)]
-      }
-    case 'REMOVE_FROM_MASTER_LIST':
-      idx = state.masterList.findIndex(item => action.payload.name === item.name)
+    case 'REMOVED_FROM_MASTER_LIST':
+      idx = state.masterList.findIndex(item => action.payload === item.id)
       return {
         ...state, masterList:
           state.masterList.slice(0, idx).concat(state.masterList.slice(idx + 1))

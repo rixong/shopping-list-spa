@@ -9,7 +9,7 @@ export const getUser = () => async dispatch => {
     const response = (await axios.get(`${baseURL}/users/1`)).data
     // console.log(response);
     dispatch({
-      type: 'GET_USER',
+      type: 'GOT_USER',
       payload: response
     })
   }
@@ -28,17 +28,25 @@ export const addItem = (listItem) => async dispatch => {
       quantity: listItem.quantity
     })).data
     console.log(response)
-    if (response.status === 'exists'){
+    if (response.status === 'exists') {
       dispatch(addNotification(response.message))
     } else {
       dispatch({
-        type: 'ADDED_ITEM',
+        type: 'ADDED_ITEM_TO_CUR_LIST',
         payload: response.listItem
       })
     }
   }
   catch (e) {
     console.log('server error', e.message)
+    dispatch(addNotification(e.message))
+  }
+}
+
+const removeItemFromCurList = (itemId) => {
+  return {
+    type: 'REMOVED_ITEMS_FROM_CUR_LIST',
+    payload: itemId
   }
 }
 
@@ -49,7 +57,7 @@ export const addItemToMasterList = (item, user_id, list_id) => async dispatch =>
       name: item.name,
       category_id: item.category_id
     })).data
-    console.log(response)
+    // console.log(response)
     if (response.status !== 'exists') {
       dispatch({
         type: 'ADDED_ITEM_TO_MASTERLIST',
@@ -59,21 +67,35 @@ export const addItemToMasterList = (item, user_id, list_id) => async dispatch =>
     dispatch(addItem({ item_id: response.item.id, list_id, quantity: item.quantity }))
   }
   catch (e) {
-    console.log('server error', e.message)
+    dispatch(addNotification(e.message))
   }
 }
 
-export const changeStatus = (item) => {
-  return {
-    type: 'CHANGED_STATUS',
-    payload: item
+export const changeStatus = (item) => async dispatch => {
+  try {
+    const response = (await axios.patch(`${baseURL}/list_items/${item.id}`)).data
+    // console.log(response)
+    dispatch({
+      type: 'CHANGED_STATUS',
+      payload: response.item
+    })
+  }
+  catch (e) {
+    dispatch(addNotification(e.message))
   }
 }
 
-export const removeFromMasterList = (item) => {
-  return {
-    type: 'REMOVE_FROM_MASTER_LIST',
-    payload: item
+export const removeFromMasterList = (itemId) => async dispatch => {
+  try {
+    const response = (await axios.delete(`${baseURL}/items/${itemId}`)).data
+    dispatch(removeItemFromCurList(itemId))
+    dispatch ({
+      type: 'REMOVED_FROM_MASTER_LIST',
+      payload: itemId
+    })
+  }
+  catch (e) {
+    dispatch(addNotification(e.message))
   }
 }
 

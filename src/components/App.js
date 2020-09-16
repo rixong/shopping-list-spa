@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Navbar from './Navbar';
 import AddItems from './AddItems';
 import CurrentList from './CurrentList';
-// import EditMasterList from './EditMasterList';
+import EditMasterList from './EditMasterList';
 import Alert from './Alert';
 import { getUser } from '../actions';
 
@@ -21,7 +21,7 @@ const App = ({ notification, getUser }) => {
 
   return (
 
-    <div className="container position-fixed">
+    <div className="container">
       <Navbar />
       <div className="row shadow mt-4 pb-5">
         <div className="col-sm-8 border-right">
@@ -32,7 +32,7 @@ const App = ({ notification, getUser }) => {
           <CurrentList />
         </div>
       </div>
-      {/* <EditMasterList /> */}
+      <EditMasterList />
     </div>
   )
 }

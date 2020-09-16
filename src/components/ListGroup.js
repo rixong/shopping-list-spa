@@ -1,14 +1,13 @@
 import React from 'react';
-import { categoryLookup } from '../seed';
+import { connect } from 'react-redux';
 import ListItem from './ListItem';
 
 
-const ListGroup = ({ category, items }) => {
-  // console.log(items)
+const ListGroup = ({ categoryId, categories, items }) => {
   return (
 
-    <div className="bg-info" >
-      <div className="header h5 ml-4 pt-2">{categoryLookup[category]}</div>
+    <div className="bg-info text-light" >
+      <div className="header h5 ml-4 pt-2">{categories.find(ele => ele.id === categoryId).name}</div>
       <ul className="list-group">
         {items.map(item => <ListItem item={item} key={item.id} />)}
       </ul>
@@ -16,4 +15,9 @@ const ListGroup = ({ category, items }) => {
 
   )
 }
-export default ListGroup;
+const mapStateToProps = state => {
+  return {
+    categories: state.categories
+  }
+};
+export default connect(mapStateToProps)(ListGroup);

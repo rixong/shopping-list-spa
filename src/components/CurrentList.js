@@ -20,10 +20,10 @@ const CurrentList = ({ curListItems, masterList, curList }) => {
       }
     })
 
-    // console.log(sorted)
+    console.log(sorted)
 
     for (let group in sorted) {
-      divs.push(<ListGroup category={group} items={sorted[group]} key={group} />);
+      divs.push(<ListGroup categoryId={parseInt(group,10)} items={sorted[group]} key={group} />);
     }
     // console.log(divs)
     return divs;
@@ -31,9 +31,13 @@ const CurrentList = ({ curListItems, masterList, curList }) => {
 
   return (
     <Fragment>
-      <div className="bg-info text-center text-dark mb-4">
-        <div className="h4 pt-3">{ curList.name } </div>
-        <div className="h6 pb-4">{ moment(curList.created_at).format('ddd, MMM Do') }</div>
+      <div className="row text-primary mx-2 align-items-end rounded">
+        <div className="col">
+          <div className="h4 pt-2">{curList.name} </div>
+        </div>
+        <div className="col">
+          <div className="h6 pb-1">{moment(curList.created_at).format('ddd, MMM Do')}</div>
+        </div>
       </div>
       {sortList()}
     </Fragment>

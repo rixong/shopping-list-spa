@@ -16,12 +16,12 @@ const ListItem = ({ item, changeStatus, masterList }) => {
   const nameClassDefault = 'row'
   const nameClassFinal = item.active ?
     `${nameClassDefault} text-dark`
-    : `${nameClassDefault} text-light strike`
+    : `${nameClassDefault} text-danger strike font-weight-normal`
 
   return (
     <li className="list-group-item bg-secondary py-2" role="button" onClick={onHandleClick}>
       <div className={nameClassFinal}>
-        <div className="col font-weight-bold">{name}</div>
+        <div className="col">{name}</div>
         <div className="col border-left">{item.quantity}</div>
         </div>
     </li>

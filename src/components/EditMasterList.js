@@ -9,7 +9,7 @@ const EditMasterList = ({ masterList, categories, removeFromMasterList }) => {
   // } 
 
   return (
-    <div className="row justify-content-center">
+    <div className="row justify-content-center mt-4">
       <ul className="list-group" >
         {masterList.sort((a, b) => a.name.localeCompare(b.name))
           .map((item) => (
@@ -21,7 +21,7 @@ const EditMasterList = ({ masterList, categories, removeFromMasterList }) => {
                 type="button" 
                 className="close" 
                 aria-label="Close"
-                onClick={() => removeFromMasterList(item)}
+                onClick={() => removeFromMasterList(item.id)}
               >
                 <span aria-hidden="true">&times;</span>
               </button>
