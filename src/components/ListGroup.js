@@ -3,16 +3,14 @@ import { connect } from 'react-redux';
 import ListItem from './ListItem';
 
 
-const ListGroup = ({ categoryId, categories, items }) => {
+const ListGroup = ({ categoryName, categories, items }) => {
   return (
-
     <div className="bg-info text-light" >
-      <div className="header h5 ml-4 pt-2">{categories.find(ele => ele.id === categoryId).name}</div>
+      <div className="header text-primary h5 ml-4 pt-2">{categoryName}</div>
       <ul className="list-group">
         {items.map(item => <ListItem item={item} key={item.id} />)}
       </ul>
     </div>
-
   )
 }
 const mapStateToProps = state => {

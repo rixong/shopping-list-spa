@@ -54,7 +54,7 @@ const AddItems = ({
     addItemToMasterList({
       name: trimmedName,
       category_id: queryTerm.category,
-      quantity: queryTerm.category
+      quantity: queryTerm.quantity,
     }, curUser.id, curList.id);
 
     setQueryTerm(queryDefault);

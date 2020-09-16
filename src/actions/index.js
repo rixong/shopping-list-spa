@@ -57,7 +57,6 @@ export const addItemToMasterList = (item, user_id, list_id) => async dispatch =>
       name: item.name,
       category_id: item.category_id
     })).data
-    // console.log(response)
     if (response.status !== 'exists') {
       dispatch({
         type: 'ADDED_ITEM_TO_MASTERLIST',
@@ -89,7 +88,7 @@ export const removeFromMasterList = (itemId) => async dispatch => {
   try {
     const response = (await axios.delete(`${baseURL}/items/${itemId}`)).data
     dispatch(removeItemFromCurList(itemId))
-    dispatch ({
+    dispatch({
       type: 'REMOVED_FROM_MASTER_LIST',
       payload: itemId
     })

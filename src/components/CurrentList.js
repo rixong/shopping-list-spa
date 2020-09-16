@@ -4,28 +4,29 @@ import { connect } from 'react-redux';
 
 import ListGroup from './ListGroup'
 
-const CurrentList = ({ curListItems, masterList, curList }) => {
+const CurrentList = ({ curListItems, masterList, curList, categories }) => {
 
-  const sortList = () => {
+  const divideByCategory = () => {
 
-    const sorted = {}
-    const divs = [];
+    const divided = {};
+    let divs = [];
+
     curListItems.forEach(listItem => {
       let item = masterList.find(el => listItem.item_id === el.id)
 
-      if (!sorted[item.category_id]) {
-        sorted[item.category_id] = [listItem];
+      if (!divided[item.category_id]) {
+        divided[item.category_id] = [listItem];
       } else {
-        sorted[item.category_id].push(listItem);
+        divided[item.category_id].push(listItem);
       }
     })
 
-    console.log(sorted)
-
-    for (let group in sorted) {
-      divs.push(<ListGroup categoryId={parseInt(group,10)} items={sorted[group]} key={group} />);
-    }
-    // console.log(divs)
+    categories.sort((a, b) => a.sort_order - b.sort_order);
+    categories.forEach(cat => {
+      if (divided[cat.id]) {
+        divs.push(<ListGroup categoryName={cat.name} items={divided[cat.id]} key={cat.id} />)
+      }
+    })
     return divs;
   }
 
@@ -39,7 +40,7 @@ const CurrentList = ({ curListItems, masterList, curList }) => {
           <div className="h6 pb-1">{moment(curList.created_at).format('ddd, MMM Do')}</div>
         </div>
       </div>
-      {sortList()}
+      {divideByCategory()}
     </Fragment>
   )
 }
@@ -49,6 +50,7 @@ const mapStateToProps = state => {
     curListItems: state.curListItems,
     masterList: state.masterList,
     curList: state.curList,
+    categories: state.categories
   }
 };
 
