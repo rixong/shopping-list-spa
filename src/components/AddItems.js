@@ -99,7 +99,7 @@ const AddItems = ({
             id="category-select"
             value={queryTerm.category}
           >
-            <option value="0">Category...</option>
+            <option value="0">Categories...</option>
             {categories.sort((a,b) => a.name.localeCompare(b.name)).map(cat => <option value={cat.id} key={cat.id}>{cat.name}</option>)}
           </select>
 

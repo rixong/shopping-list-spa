@@ -22,8 +22,8 @@ const App = ({ notification, getUser }) => {
 
   return (
     <Router>
-      <Navbar />
       <div className="container">
+      <Navbar />
         <div className="row">
         <div className="col-sm-8 border-right">
           <Route exact path="/" component={AddItems}></Route>
