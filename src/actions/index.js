@@ -52,7 +52,7 @@ const removeItemFromCurList = (itemId) => {
 export const addItemToMasterList = (item, user_id, list_id) => async dispatch => {
   try {
     const response = (await axios.post(`${baseURL}/items`, {
-      user_id,
+      user_id: user_id,
       name: item.name,
       category_id: item.category_id
     })).data
