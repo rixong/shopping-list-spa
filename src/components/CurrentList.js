@@ -1,10 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
 
 import ListGroup from './ListGroup'
 
 const CurrentList = ({ curListItems, masterList, curList, categories }) => {
+
 
   const divideByCategory = () => {
 
@@ -31,7 +32,8 @@ const CurrentList = ({ curListItems, masterList, curList, categories }) => {
   }
 
   return (
-    <Fragment>
+    <div>
+
       <div className="row text-primary mx-2 align-items-end rounded">
         <div className="col">
           <div className="h4 pt-2">{curList.name} </div>
@@ -41,7 +43,8 @@ const CurrentList = ({ curListItems, masterList, curList, categories }) => {
         </div>
       </div>
       {divideByCategory()}
-    </Fragment>
+
+    </div>
   )
 }
 

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 
@@ -6,41 +6,42 @@ import Navbar from './Navbar';
 import AddItems from './AddItems';
 import CurrentList from './CurrentList';
 import EditMasterList from './EditMasterList';
-import Alert from './Alert';
+// import Alert from './Alert';
 import { getUser } from '../actions';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 const App = ({ notification, getUser }) => {
 
   const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
 
-  useEffect (() => {
+  useEffect(() => {
     getUser()
 
   }, [getUser])
 
 
   return (
-
-    <div className="container">
+    <Router>
       <Navbar />
-      <div className="row shadow mt-4 pb-5">
+      <div className="container">
+        <div className="row">
         <div className="col-sm-8 border-right">
-          <AddItems />
-          {notification.error ? <Alert /> : null}
+          <Route exact path="/" component={AddItems}></Route>
+          <Route path="/edit" component={EditMasterList}></Route>
         </div>
-        <div className="col-sm-4 bg-light overflow-auto" style={{ height: vh }}>
+        <div className="col-sm-4 overflow-auto pl-5" style={{ height: vh }}>
           <CurrentList />
         </div>
+        </div>
       </div>
-      <EditMasterList />
-    </div>
+    </Router>
   )
 }
 
 const mapStateToProps = (state) => {
   return {
-    notification: state.notification
+    // notification: state.notification
   }
 }
 
-export default connect(mapStateToProps, {getUser})(App);
+export default connect(mapStateToProps, { getUser })(App);

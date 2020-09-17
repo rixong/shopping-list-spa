@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import Alert from './Alert';
 
 import { addItemToMasterList, addNotification, clearNotification } from '../actions';
 
@@ -10,7 +11,8 @@ const AddItems = ({
   masterList,
   curList,
   curUser,
-  categories
+  categories,
+  notification
 }) => {
 
   const queryDefault = { name: '', quantity: '', category: 0 }
@@ -61,8 +63,9 @@ const AddItems = ({
   }
 
   return (
-    <React-fragment>
-      <div className="display-4 text-center text-warning mb-4">Add items</div>
+    <div>
+
+      <div className="display-4 text-warning my-4">Add items</div>
       <form>
         <div className="input-group">
           <input
@@ -124,7 +127,8 @@ const AddItems = ({
             : null}
         </ul>
       </form>
-    </React-fragment>
+      {notification.error ? <Alert /> : null}
+    </div>
   )
 }
 
@@ -133,7 +137,8 @@ const mapStateToProps = state => {
     curUser: state.curUser,
     curList: state.curList,
     masterList: state.masterList,
-    categories: state.categories
+    categories: state.categories,
+    notification: state.notification
   }
 }
 
