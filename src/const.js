@@ -1,7 +1,7 @@
 // Constants.js
 const prod = {
   url: {
-    API_URL: 'https://git.heroku.com/rixong-shopping-api/api/v1'
+    API_URL: 'https://rixong-shopping-api.herokuapp.com/api/v1'
   }
 };
 const dev = {
