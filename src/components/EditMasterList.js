@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { XCircleFillIcon } from '@primer/octicons-react'
 
 import { removeFromMasterList } from '../actions';
-import CategorySortOrder from './CategorySortOrder';
-
 
 const EditMasterList = ({ masterList, categories, removeFromMasterList }) => {
 
@@ -38,8 +36,7 @@ const EditMasterList = ({ masterList, categories, removeFromMasterList }) => {
             </li>)
           )}
       </ul>
-      <hr></hr>
-      <CategorySortOrder/>
+
     </div>
   )
 }

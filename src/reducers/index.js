@@ -47,6 +47,16 @@ export default function shoppingListReducer(
         ...state, masterList:
           state.masterList.slice(0, idx).concat(state.masterList.slice(idx + 1))
       }
+
+    case 'REORDERED_CATEGORIES':
+      let reorder = action.payload.map((ele, idx) => {
+        let temp = [...state.categories].find(cat => cat.id === ele)
+        temp.sort_order = idx;
+        return temp;
+      })
+      console.log(reorder)
+      return {...state, categories: reorder}
+
     case 'ADDED_NOTIFICATION':
       return { ...state, notification: action.payload }
     case 'CLEARED_NOTIFICATION':

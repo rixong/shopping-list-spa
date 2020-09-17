@@ -83,6 +83,14 @@ export const changeStatus = (item) => async dispatch => {
   }
 }
 
+export const changeCatSortorder = (newOrder) => {
+  console.log('from action', newOrder)
+  return {
+    type: 'REORDERED_CATEGORIES',
+    payload: newOrder
+  }
+}
+
 export const removeFromMasterList = (itemId) => async dispatch => {
   try {
     await axios.delete(`${baseURL}/items/${itemId}`)

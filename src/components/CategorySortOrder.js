@@ -1,17 +1,20 @@
-import React, {useState} from 'react';
+import React from 'react';
+// import React, {useState, useEffect} from 'react';
+import {connect} from 'react-redux';
+
 import { sortableContainer, sortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
-import { ThreeBarsIcon } from '@primer/octicons-react'
+import { ThreeBarsIcon } from '@primer/octicons-react';
+
+import {changeCatSortorder} from '../actions';
 
 
-const CategorySortOrder = () => {
-
-  const [items, setItems] = useState(['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']);
+const CategorySortOrder = ({ categories, changeCatSortorder }) => {
 
   const SortableItem = sortableElement(({ value }) =>
   <li className="list-group-item">
     <ThreeBarsIcon size={16} className="mr-3"/>
-    {value}
+    {value.name}
   </li>);
   
   const SortableContainer = sortableContainer(({ children }) => {
@@ -19,19 +22,27 @@ const CategorySortOrder = () => {
   });
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
-    setItems(arrayMove(items, oldIndex, newIndex))
+    const newOrder = arrayMove(categories, oldIndex, newIndex)
+    const ids = newOrder.map(el => el.id) 
+    changeCatSortorder(ids)
   };
 
   return (
     <div>
       <h4 className="text-warning">Drag to Sort Categories</h4>
       <SortableContainer onSortEnd={onSortEnd}>
-        {items.map((value, index) => (
-          <SortableItem key={`item-${value}`} index={index} value={value} />
+        {categories.map((value, index) => (
+          <SortableItem key={`item-${value.name}`} index={index} value={value} />
         ))}
       </SortableContainer>
 
     </div>
   )
 }
-export default CategorySortOrder;
+
+const mapStateToProps = state => {
+  return {
+    categories: state.categories
+  }
+};
+export default connect(mapStateToProps ,{changeCatSortorder})(CategorySortOrder);

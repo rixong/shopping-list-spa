@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import Alert from './Alert';
+import CategorySortOrder from './CategorySortOrder';
 
 import { addItemToMasterList, addNotification, clearNotification } from '../actions';
 
@@ -128,6 +129,8 @@ const AddItems = ({
         </ul>
       </form>
       {notification.error ? <Alert /> : null}
+      <hr></hr>
+      <CategorySortOrder/>
     </div>
   )
 }
