@@ -1,6 +1,7 @@
 import axios from 'axios';
+import {config} from '../const';
 
-const baseURL = 'http://localhost:3000/api/v1'
+const baseURL = config.url.API_URL
 
 // ACTIONS
 
@@ -20,14 +21,13 @@ export const getUser = () => async dispatch => {
 
 
 export const addItem = (listItem) => async dispatch => {
-  console.log('from Add Item', listItem)
   try {
     const response = (await axios.post(`${baseURL}/list_items`, {
       item_id: listItem.item_id,
       list_id: listItem.list_id,
       quantity: listItem.quantity
     })).data
-    console.log(response)
+    // console.log(response)
     if (response.status === 'exists') {
       dispatch(addNotification(response.message))
     } else {
@@ -38,7 +38,6 @@ export const addItem = (listItem) => async dispatch => {
     }
   }
   catch (e) {
-    console.log('server error', e.message)
     dispatch(addNotification(e.message))
   }
 }
@@ -86,7 +85,7 @@ export const changeStatus = (item) => async dispatch => {
 
 export const removeFromMasterList = (itemId) => async dispatch => {
   try {
-    const response = (await axios.delete(`${baseURL}/items/${itemId}`)).data
+    await axios.delete(`${baseURL}/items/${itemId}`)
     dispatch(removeItemFromCurList(itemId))
     dispatch({
       type: 'REMOVED_FROM_MASTER_LIST',

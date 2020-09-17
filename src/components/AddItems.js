@@ -19,7 +19,7 @@ const AddItems = ({
   const [searchResults, setSearchResults] = useState([]);
 
   const onHandleChange = (e) => {
-    clearNotification();
+    // clearNotification(); TODO - CLEAR FIELDS AFTER ERRORS
     let value = e.target.value
     setQueryTerm({ ...queryTerm, [e.target.name]: value.toLowerCase() })
     if (value !== '') {
@@ -72,6 +72,7 @@ const AddItems = ({
             placeholder="Search for item..."
             value={queryTerm.name}
             onChange={(e) => onHandleChange(e)}
+            onFocus={()=>clearNotification()}
             name="name"
             aria-label="enter item name"
             required
