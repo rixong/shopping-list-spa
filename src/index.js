@@ -21,14 +21,14 @@ const logger = store => next => action => {
 
 const middlewares = [thunk];
 
+if ( process.env.NODE_ENV === 'development') {    
+  middlewares.push(logger);    
+}
+
 const store = createStore(
   shoppingListReducer,
   applyMiddleware(...middlewares)
 )
-
-if ( process.env.NODE_ENV === 'development') {    
-  middlewares.push(logger);    
-}
 
 ReactDOM.render(
   <Provider store={store}>
