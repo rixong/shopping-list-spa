@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light pt-4">
       <a className="navbar-brand" href="www.rickglascock.com">
         <div className="h3" >Cart Compass</div></a>
         <img src='/shopping-cart-logo.png' alt="shopping cart" style={{ width: '50px' }}></img>

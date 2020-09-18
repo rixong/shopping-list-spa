@@ -14,7 +14,7 @@ const EditMasterList = ({ masterList, categories, removeFromMasterList }) => {
     <div className="">
       <div className="display-4 text-warning my-4">Edit Master List</div>
 
-      <ul className="list-group-flush pl-0" >
+      <ul className="list-group-flush pl-0 w-75" >
         {masterList.sort((a, b) => a.name.localeCompare(b.name))
           .map((item) => (
             <li

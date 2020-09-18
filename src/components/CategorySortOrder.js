@@ -1,15 +1,14 @@
 import React from 'react';
-// import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 
 import { sortableContainer, sortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 import { ThreeBarsIcon } from '@primer/octicons-react';
 
-import {changeCatSortorder} from '../actions';
+import {doReorderCategories} from '../actions';
 
 
-const CategorySortOrder = ({ categories, changeCatSortorder }) => {
+const CategorySortOrder = ({ categories, curUser, doReorderCategories }) => {
 
   const SortableItem = sortableElement(({ value }) =>
   <li className="list-group-item">
@@ -22,9 +21,10 @@ const CategorySortOrder = ({ categories, changeCatSortorder }) => {
   });
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
+    console.log(oldIndex, newIndex)
     const newOrder = arrayMove(categories, oldIndex, newIndex)
     const ids = newOrder.map(el => el.id) 
-    changeCatSortorder(ids)
+    doReorderCategories(curUser.id, ids)
   };
 
   return (
@@ -42,7 +42,8 @@ const CategorySortOrder = ({ categories, changeCatSortorder }) => {
 
 const mapStateToProps = state => {
   return {
-    categories: state.categories
+    categories: state.categories,
+    curUser: state.curUser
   }
 };
-export default connect(mapStateToProps ,{changeCatSortorder})(CategorySortOrder);
+export default connect(mapStateToProps ,{doReorderCategories})(CategorySortOrder);

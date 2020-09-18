@@ -34,9 +34,9 @@ const CurrentList = ({ curListItems, masterList, curList, categories }) => {
   return (
     <div>
 
-      <div className="row text-primary mx-2 align-items-end rounded">
+      <div className="row text-primary mt-4 mb-3 mx-2 align-items-end rounded">
         <div className="col">
-          <div className="h4 pt-2">{curList.name} </div>
+          <div className="h3 pt-2">{curList.name} </div>
         </div>
         <div className="col">
           <div className="h6 pb-1">{moment(curList.created_at).format('ddd, MMM Do')}</div>

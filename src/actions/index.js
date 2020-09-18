@@ -83,12 +83,14 @@ export const changeStatus = (item) => async dispatch => {
   }
 }
 
-export const changeCatSortorder = (newOrder) => {
+export const doReorderCategories = (userId, newOrder) => async dispatch=> {
   console.log('from action', newOrder)
-  return {
+await axios.post(`${baseURL}/categories`, {user_id: userId, order: newOrder.join(',')})
+  
+dispatch({
     type: 'REORDERED_CATEGORIES',
     payload: newOrder
-  }
+  })
 }
 
 export const removeFromMasterList = (itemId) => async dispatch => {
