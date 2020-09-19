@@ -8,7 +8,8 @@ export default function shoppingListReducer(
     curListItems: [],
     masterList: [],
     categories: [],
-    notification: { error: false, message: '' }
+    notification: { error: false, message: '' },
+    loading: false
   },
   action
 ) {
@@ -23,6 +24,7 @@ export default function shoppingListReducer(
         curListItems: action.payload.curListItems,
         masterList: action.payload.items,
         categories: action.payload.categories,
+        loading: false
       }
 
     case 'ADDED_ITEM_TO_CUR_LIST':
@@ -61,6 +63,10 @@ export default function shoppingListReducer(
       return { ...state, notification: action.payload }
     case 'CLEARED_NOTIFICATION':
       return { ...state, notification: action.payload }
+    case 'LOADING':
+      return {...state, loading: true}
+
+
     default:
       return state
   }

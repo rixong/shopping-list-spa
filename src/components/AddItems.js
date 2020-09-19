@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import Alert from './Alert';
-import CategorySortOrder from './CategorySortOrder';
 
 import { addItemToMasterList, addNotification, clearNotification } from '../actions';
 
@@ -68,69 +67,75 @@ const AddItems = ({
 
       <div className="display-4 text-warning my-4">Add items</div>
       <form>
-        <div className="input-group">
-          <input
-            className="form-control"
-            id="name-input"
-            type="text"
-            placeholder="Search for item..."
-            value={queryTerm.name}
-            onChange={(e) => onHandleChange(e)}
-            onFocus={()=>clearNotification()}
-            name="name"
-            aria-label="enter item name"
-            required
-          ></input>
+        <div className="row">
+          <div className="col-md-5">
+            <input
+              className="form-control"
+              type="text"
+              id="name-input"
+              placeholder="Search or add a new item..."
+              value={queryTerm.name}
+              onChange={(e) => onHandleChange(e)}
+              onFocus={() => clearNotification()}
+              name="name"
+              aria-label="enter item name"
+              required
+            ></input>
 
-          <input
-            className="form-control"
-            id="quantity-input"
-            type="text"
-            placeholder="Quantity..."
-            value={queryTerm.quantity}
-            onChange={(e) => onHandleChange(e)}
-            aria-label="enter quantity"
-            name="quantity"
-          ></input>
+            <ul className="list-group itemSearchList">
+              {searchResults ?
+                searchResults.map((item) =>
+                  <li
+                    key={item.id}
+                    className="list-group-item role"
+                    role="button"
+                    onClick={(e) => onSelectItem(e)}
+                    data-id={item.id}
+                  >{item.name}</li>)
+                : null}
+            </ul>
+          </div>
+          <div className="col-md-3">
+            <input
+              className="form-control"
+              id="quantity-input"
+              type="text"
+              placeholder="Quantity..."
+              value={queryTerm.quantity}
+              onChange={(e) => onHandleChange(e)}
+              aria-label="enter quantity"
+              name="quantity"
+            ></input>
+          </div>
 
-          <select
-            className="form-control"
-            onChange={(e) => onHandleChange(e)}
-            name="category"
-            id="category-select"
-            value={queryTerm.category}
-          >
-            <option value="0">Categories...</option>
-            {categories.sort((a,b) => a.name.localeCompare(b.name)).map(cat => <option value={cat.id} key={cat.id}>{cat.name}</option>)}
-          </select>
-
-
-          <div className="input-group-append">
-            <button
-              className="btn btn-outline-primary"
-              type="button"
-              id="button-addon2"
-              onClick={onClickSubmit}
-            >Add item</button>
+          <div className="col-md-4">
+            <select
+              className="form-control"
+              onChange={(e) => onHandleChange(e)}
+              name="category"
+              id="category-select"
+              value={queryTerm.category}
+            >
+              <option value="0">Category...</option>
+              {categories.sort((a, b) => a.name.localeCompare(b.name)).map(cat => <option value={cat.id} key={cat.id}>{cat.name}</option>)}
+            </select>
+            <div className="row justify-content-center mt-3">
+              <div className="input-group-append">
+                <button
+                  className="btn btn-outline-primary"
+                  type="button"
+                  id="button-addon2"
+                  onClick={onClickSubmit}
+                >Add item</button>
+              </div>
+            </div>
           </div>
 
         </div>
-        <ul className="list-group-flush itemSearchList">
-          {searchResults ?
-            searchResults.map((item) =>
-              <li
-                key={item.id}
-                className="list-group-item role"
-                role="button"
-                onClick={(e) => onSelectItem(e)}
-                data-id={item.id}
-              >{item.name}</li>)
-            : null}
-        </ul>
+
+
       </form>
       {notification.error ? <Alert /> : null}
-      <hr></hr>
-      <CategorySortOrder/>
     </div>
   )
 }

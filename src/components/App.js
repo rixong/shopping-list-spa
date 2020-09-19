@@ -5,11 +5,14 @@ import Navbar from './Navbar';
 import AddItems from './AddItems';
 import CurrentList from './CurrentList';
 import EditMasterList from './EditMasterList';
+import CategorySortOrder from './CategorySortOrder';
+import Spinner from './Spinner';
+
 
 import { getUser } from '../actions';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-const App = ({ notification, getUser }) => {
+const App = ({ loading, getUser }) => {
 
   const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
 
@@ -21,17 +24,24 @@ const App = ({ notification, getUser }) => {
 
   return (
     <Router>
-      <div className="container">
-      <Navbar />
-        <div className="row">
-        <div className="col-sm-8 border-right">
-          <Route exact path="/" component={AddItems}></Route>
-          <Route path="/edit" component={EditMasterList}></Route>
-        </div>
-        <div className="col-sm-4 overflow-auto pl-5" style={{ height: vh }}>
-          <CurrentList />
-        </div>
-        </div>
+      <div className="container-fluid">
+        <Navbar />
+        {loading ?
+          <Spinner /> 
+          :
+
+          <div className="row justify-content-center">
+            <div className="col-md border-right">
+              <Route exact path="/" component={AddItems}></Route>
+              <Route path="/edit" component={EditMasterList}></Route>
+              <Route path="/sort" component={CategorySortOrder}></Route>
+            </div>
+            <div className="col-md overflow-auto " style={{ height: vh }}>
+              <CurrentList />
+            </div>
+          </div>
+
+        }
       </div>
     </Router>
   )
@@ -39,7 +49,7 @@ const App = ({ notification, getUser }) => {
 
 const mapStateToProps = (state) => {
   return {
-    // notification: state.notification
+    loading: state.loading
   }
 }
 

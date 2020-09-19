@@ -7,6 +7,7 @@ const baseURL = config.url.API_URL
 
 export const getUser = () => async dispatch => {
   try {
+    dispatch(loading());
     const response = (await axios.get(`${baseURL}/users/1`)).data
     // console.log(response);
     dispatch({
@@ -104,6 +105,12 @@ export const removeFromMasterList = (itemId) => async dispatch => {
   }
   catch (e) {
     dispatch(addNotification(e.message))
+  }
+}
+
+export const loading = () => {
+  return {
+    type: 'LOADING'
   }
 }
 
