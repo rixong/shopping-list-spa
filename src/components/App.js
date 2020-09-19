@@ -2,15 +2,16 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import Navbar from './Navbar';
-import AddItems from './AddItems';
+import Spinner from './Spinner';
+import ListHome from './ListHome';
 import CurrentList from './CurrentList';
+import AddItems from './AddItems';
 import EditMasterList from './EditMasterList';
 import CategorySortOrder from './CategorySortOrder';
-import Spinner from './Spinner';
 
 
 import { getUser } from '../actions';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 
 const App = ({ loading, getUser }) => {
@@ -28,19 +29,21 @@ const App = ({ loading, getUser }) => {
       <div className="container-fluid">
         <Navbar />
         {loading ?
-          <Spinner /> 
+          <Spinner />
           :
-
-          <div className="row justify-content-center">
-            <div className="col-md border-right">
-              <Route exact path="/" component={AddItems}></Route>
-              <Route path="/edit" component={EditMasterList}></Route>
-              <Route path="/sort" component={CategorySortOrder}></Route>
+          <Switch>
+            <Route exact path="/" component={ListHome}></Route>
+            <div className="row justify-content-center">
+              <div className="col-md border-right">
+                <Route exact path="/add" component={AddItems}></Route>
+                <Route path="/edit" component={EditMasterList}></Route>
+                <Route path="/sort" component={CategorySortOrder}></Route>
+              </div>
+              <div className="col-md overflow-auto " style={{ height: vh }}>
+                <CurrentList />
+              </div>
             </div>
-            <div className="col-md overflow-auto " style={{ height: vh }}>
-              <CurrentList />
-            </div>
-          </div>
+          </Switch>
 
         }
       </div>

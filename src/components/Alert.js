@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 const Alert = ({ notification }) => {
   return (
-    <div className="alert alert-warning" role="alert">
+    <div className="alert alert-warning mt-4" role="alert">
       {notification.message}
     </div>
   )
