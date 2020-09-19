@@ -11,6 +11,8 @@ import './custom.css';
 import './fresca.css';
 
 import App from './components/App';
+require ('bootstrap')
+
 
 const logger = store => next => action => {
   console.log('dispatching', action);

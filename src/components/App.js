@@ -12,6 +12,7 @@ import Spinner from './Spinner';
 import { getUser } from '../actions';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
+
 const App = ({ loading, getUser }) => {
 
   const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
