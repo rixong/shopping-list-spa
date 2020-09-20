@@ -22,6 +22,10 @@
   text-decoration: line-through;
 }
 
-.xxx {
+.category-sort-display {
   cursor: pointer;
+}
+
+svg {
+  fill: red;
 }

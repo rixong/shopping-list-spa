@@ -6,20 +6,15 @@ import { removeFromMasterList } from '../actions';
 
 const EditMasterList = ({ masterList, categories, removeFromMasterList }) => {
 
-  // const handleDeleteClick = () => {
-  //   console.log("here")
-  // } 
-
   return (
-    <div className="">
+    <React.Fragment>
       <div className="header">Edit master list</div>
-
-      <ul className="list-group-flush pl-0 w-75" >
+      <div className="row justify-content-center">
+      <ul className="list-group-flush pl-0 w-75 rounded" >
         {masterList.sort((a, b) => a.name.localeCompare(b.name))
           .map((item) => (
             <li
               className="list-group-item d-flex justify-content-between pl-0 py-2"
-              // style={{width: '70%'}}
               key={item.id}>
               <div className="col-5">{item.name}</div>
               <div className="col-5">{(categories.find(el => el.id === item.category_id)).name}</div>
@@ -36,8 +31,8 @@ const EditMasterList = ({ masterList, categories, removeFromMasterList }) => {
             </li>)
           )}
       </ul>
-
-    </div>
+      </div>
+    </React.Fragment>
   )
 }
 

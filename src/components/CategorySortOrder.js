@@ -11,7 +11,7 @@ import { doReorderCategories } from '../actions';
 const CategorySortOrder = ({ categories, curUser, doReorderCategories }) => {
 
   const SortableItem = sortableElement(({ value }) =>
-    <li className="list-group-item py-1 xxx">
+    <li className="list-group-item py-1 category-sort-display">
       <ThreeBarsIcon size={16} className="mr-3" />
       {value.name}
     </li>);
