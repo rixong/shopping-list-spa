@@ -1,6 +1,14 @@
-/* #item-input {
-  width:45%;
-} */
+.left-column{
+  background-color: rgb(210, 210, 210);
+}
+
+.header {
+  font-size: 3.5em;
+  font-weight: 300;
+  color:#FF7E67;
+  margin:10px 0;
+  text-align: center;
+}
 
 .list-home {
   max-width: 600px;
@@ -12,4 +20,8 @@
 
 .strike {
   text-decoration: line-through;
+}
+
+.xxx {
+  cursor: pointer;
 }

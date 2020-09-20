@@ -65,7 +65,7 @@ const AddItems = ({
   return (
     <div>
 
-      <div className="display-4 text-warning text-center my-4">Add items</div>
+      <div className="header">Add items</div>
       <form>
         <div className="row">
           <div className="col-md-5 mb-3">
@@ -122,7 +122,7 @@ const AddItems = ({
             <div className="row justify-content-center mt-3">
               <div className="input-group-append">
                 <button
-                  className="btn btn-outline-primary"
+                  className="btn btn-primary"
                   type="button"
                   id="button-addon2"
                   onClick={onClickSubmit}

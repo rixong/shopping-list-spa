@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light pt-4">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark pt-4">
       <Link className="nav-link" to="/">
-        <div className="h2" >
+        <div className="h2 text-success" >
           Cart Compass
           <img src='/shopping-cart-logo.png' alt="shopping cart" style={{ width: '50px' }}></img>
         </div></Link>

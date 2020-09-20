@@ -11,7 +11,7 @@ import { doReorderCategories } from '../actions';
 const CategorySortOrder = ({ categories, curUser, doReorderCategories }) => {
 
   const SortableItem = sortableElement(({ value }) =>
-    <li className="list-group-item py-1">
+    <li className="list-group-item py-1 xxx">
       <ThreeBarsIcon size={16} className="mr-3" />
       {value.name}
     </li>);
@@ -29,7 +29,7 @@ const CategorySortOrder = ({ categories, curUser, doReorderCategories }) => {
 
   return (
     <React.Fragment>
-      <div className="display-4 text-center text-warning my-4 ">Re-order Categories</div>
+      <div className="header">Move categories</div>
       <div className="row justify-content-center">
         <SortableContainer onSortEnd={onSortEnd}>
           {categories.map((value, index) => (
