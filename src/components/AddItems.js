@@ -65,10 +65,10 @@ const AddItems = ({
   return (
     <div>
 
-      <div className="display-4 text-warning my-4">Add items</div>
+      <div className="display-4 text-warning text-center my-4">Add items</div>
       <form>
         <div className="row">
-          <div className="col-md-5">
+          <div className="col-md-5 mb-3">
             <input
               className="form-control"
               type="text"
@@ -95,7 +95,7 @@ const AddItems = ({
                 : null}
             </ul>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-3 mb-3">
             <input
               className="form-control"
               id="quantity-input"

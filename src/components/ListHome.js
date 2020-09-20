@@ -3,7 +3,7 @@ import CurrentList from './CurrentList'
 
 const ListHome = () => {
   return (
-    <div className="container w-50">
+    <div className="container list-home">
       <CurrentList></CurrentList>
     </div>
   )

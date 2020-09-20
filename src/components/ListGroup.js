@@ -5,8 +5,8 @@ import ListItem from './ListItem';
 
 const ListGroup = ({ categoryName, categories, items }) => {
   return (
-    <div className="bg-info text-light" >
-      <div className="header text-primary h5 ml-4 pt-2">{categoryName}</div>
+    <div className="mb-3" >
+      <div className="text-light bg-dark h5 pl-4  mb-0 rounded">{categoryName}</div>
       <ul className="list-group">
         {items.map(item => <ListItem item={item} key={item.id} />)}
       </ul>

@@ -19,7 +19,7 @@ const ListItem = ({ item, changeStatus, masterList }) => {
     : `${nameClassDefault} text-danger strike font-weight-normal`
 
   return (
-    <li className="list-group-item bg-secondary py-2" role="button" onClick={onHandleClick}>
+    <li className="list-group-item bg-light py-2 h5" role="button" onClick={onHandleClick}>
       <div className={nameClassFinal}>
         <div className="col">{name}</div>
         <div className="col border-left">{item.quantity}</div>

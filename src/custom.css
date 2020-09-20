@@ -1,15 +1,13 @@
-#item-input {
+/* #item-input {
   width:45%;
-}
-
-/* #quantity-input {
-  width:25%;
 } */
 
-.itemSearchList {
-  /* width: 100%; */
-  /* margin-left:0; */
-  /* padding-left:0; */
+.list-home {
+  max-width: 600px;
+}
+
+.category-list {
+  max-width: 300px;
 }
 
 .strike {
