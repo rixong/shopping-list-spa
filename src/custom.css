@@ -5,9 +5,21 @@
 .header {
   font-size: 3.5em;
   font-weight: 300;
-  color:#FF7E67;
   margin:10px 0;
   text-align: center;
+}
+
+.login-box {
+  margin: 0 auto;
+  width: 600px;
+  height: 800px;
+  background-color: #FF7E67;
+}
+
+.login-form {
+  padding-top: 20px;
+  width: 400px;
+  margin: 0 auto;
 }
 
 .list-home {

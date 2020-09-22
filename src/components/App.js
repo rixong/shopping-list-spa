@@ -8,6 +8,7 @@ import CurrentList from './CurrentList';
 import AddItems from './AddItems';
 import EditMasterList from './EditMasterList';
 import CategorySortOrder from './CategorySortOrder';
+import Login from './Login'
 
 
 import { getUser } from '../actions';
@@ -26,8 +27,9 @@ const App = ({ loading, getUser }) => {
 
   return (
     <Router>
-      <div className="container-fluid bg-dark">
-        <Navbar />
+      <div className="container-fluid">
+        <Login/>
+        {/* <Navbar />
         {loading ?
           <Spinner />
           :
@@ -45,7 +47,7 @@ const App = ({ loading, getUser }) => {
             </div>
           </Switch>
 
-        }
+        } */}
       </div>
     </Router>
   )
