@@ -5,11 +5,16 @@ const baseURL = config.url.API_URL
 
 // ACTIONS
 
-export const doLogin = (user) => async dispatch => {
+export const doLogin = (user = 'token') => async dispatch => {
   let response;
+  dispatch({ type: 'STARTED_LOADING' });
   try {
     if (user.password_confirmation) {
       response = (await axios.post(`${baseURL}/users`, user)).data
+    } else if (user === 'token') {
+      response = (await axios.get(`${baseURL}/profile`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('jwt')}` }
+      })).data
     } else {
       response = (await axios.post(`${baseURL}/login`, user)).data
     }
@@ -23,13 +28,14 @@ export const doLogin = (user) => async dispatch => {
   catch (e) {
     console.log('server error', e.message)
   }
+  dispatch({ type: 'FINISHED_LOADING' });
 }
 
 export const doAutoLogin = (token) => async dispatch => {
+  dispatch({ type: 'STARTED_LOADING' });
   try {
-    console.log(token)
     const response = (await axios.get(`${baseURL}/profile`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem('jwt')}`}
+      headers: { Authorization: `Bearer ${localStorage.getItem('jwt')}` }
     })).data
     dispatch({
       type: "ADDED_CURRENT_USER",
@@ -39,6 +45,7 @@ export const doAutoLogin = (token) => async dispatch => {
   catch (e) {
     console.log('server error', e.message)
   }
+  dispatch({ type: 'FINISHED_LOADING' });
 }
 
 export const addItem = (listItem) => async dispatch => {
@@ -128,9 +135,9 @@ export const removeFromMasterList = (itemId) => async dispatch => {
   }
 }
 
-export const loading = () => {
+export const doClearUser = () => {
   return {
-    type: 'LOADING'
+    type: "USER_CLEARED",
   }
 }
 

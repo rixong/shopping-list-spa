@@ -1,7 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import {connect} from 'react-redux';
 
-const Navbar = () => {
+import {doClearUser} from '../actions';
+
+const Navbar = ({doClearUser}) => {
+
+  const onLogout = () => {
+    localStorage.removeItem('jwt')
+    doClearUser()
+  }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark pt-4">
       <Link className="nav-link" to="/">
@@ -24,11 +33,11 @@ const Navbar = () => {
             <Link className="nav-link" to="/edit">My Items</Link>
           </li>
           <li className="nav-item ">
-            <Link className="nav-link" to="/">Logout</Link>
+            <div className="nav-link" role='button' onClick={onLogout}>Logout</div>
           </li>
         </ul>
       </div>
     </nav>
   )
 }
-export default Navbar;
+export default connect (null, {doClearUser})(Navbar);

@@ -1,28 +1,27 @@
 /// REDUCERS
 
+const initialState = {
+  curUser: null,
+  curList: {},
+  curListItems: [],
+  masterList: [],
+  categories: [],
+  lists: [],
+  notification: { error: false, message: '' },
+  loading: false
+}
 
 export default function shoppingListReducer(
-  state = {
-    curUser: null,
-    curList: {},
-    curListItems: [],
-    masterList: [],
-    categories: [],
-    lists: [],
-    notification: { error: false, message: '' },
-    loading: false
-  },
-  action
+  state = initialState, action
 ) {
   // console.log('From reducer', action.payload)
   let idx;
   switch (action.type) {
 
     case 'ADDED_CURRENT_USER':
-      // console.log(action.payload.categories)
       return {
-        ...state, 
-        curUser: {email: action.payload.email, id: action.payload.id},
+        ...state,
+        curUser: { email: action.payload.email, id: action.payload.id },
         lists: action.payload.lists,
         masterList: action.payload.items,
         categories: action.payload.categories,
@@ -32,7 +31,7 @@ export default function shoppingListReducer(
       return { ...state, curListItems: state.curListItems.concat(action.payload) }
     case 'REMOVED_ITEMS_FROM_CUR_LIST':
       let tempItem = [...state.curListItems].filter(item => item.item_id !== action.payload)
-      return {...state, curListItems: tempItem}
+      return { ...state, curListItems: tempItem }
 
     case 'CHANGED_STATUS':
       idx = state.curListItems.findIndex(item => item.item_id === action.payload.item_id)
@@ -58,16 +57,18 @@ export default function shoppingListReducer(
         return temp;
       })
       console.log(reorder)
-      return {...state, categories: reorder}
+      return { ...state, categories: reorder }
 
     case 'ADDED_NOTIFICATION':
       return { ...state, notification: action.payload }
     case 'CLEARED_NOTIFICATION':
       return { ...state, notification: action.payload }
-    case 'LOADING':
-      return {...state, loading: true}
-
-
+    case 'STARTED_LOADING':
+      return { ...state, loading: true }
+    case 'FINISHED_LOADING':
+      return { ...state, loading: false }
+    case 'USER_CLEARED':
+      return {...initialState}
     default:
       return state
   }

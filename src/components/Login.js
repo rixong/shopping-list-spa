@@ -15,16 +15,7 @@ const Login = ({ doLogin }) => {
     newUser: "Already have an account?"
   }
 
-  // useEffect( () => {
-  //   console.log('Here!')
-  //   if (localStorage.getItem('jwt')) {
-  //     console.log('token exists!')
-  //     doAutoLogin(localStorage.getItem('jwt'))
-  //   }
-  // },[doAutoLogin])
-
   const onHandleChange = (e) => {
-    // console.log(e.target.value)
     setInputText({ ...inputText, [e.target.name]: e.target.value })
   }
 
@@ -36,11 +27,12 @@ const Login = ({ doLogin }) => {
 
   return (
     <div className="login-box bg-light mt-4 shadow-lg rounded">
-      <div className="row mt-4 justify-content-center">
-        <img src="shopping-cart-logo.png" alt="cart" className="mt-5" style={{ width: "100px" }}></img>
+      <div className="row mt-4 justify-content-center" style={{height:"100px"}}>
+        <img src="shopping-cart-logo.png" alt="cart" className="mt-5" style={{ width: "80px" }}></img>
       </div>
       <div className="display-3 text-center text-warning pt-5">Cart Compass</div>
-      <div className="h3 text-center text-dark">Shop faster</div>
+      <div className="h3 text-center text-dark">Shop faster, shop smarter</div>
+
       <form>
         <div className="form-group login-form">
           <input
@@ -76,12 +68,11 @@ const Login = ({ doLogin }) => {
 
             : null
           }
-
           <button className="btn btn-primary btn-lg w-100" onClick={(e) => onHandleSubmit(e)}>Continue</button>
-
         </div>
       </form>
-      <div className="mt-5 d-block">
+
+      <div className="login-switch d-block">
         <p className="text-center">{message[formType]}</p>
         {formType === 'login' ?
           <div className="text-center text-primary h5" onClick={() => setFormType('newUser')} role="button">Create account</div>
