@@ -5,20 +5,54 @@ const baseURL = config.url.API_URL
 
 // ACTIONS
 
-export const getUser = () => async dispatch => {
+export const doLogin = (user) => async dispatch => {
+  let response;
+  console.log('new', user)
   try {
-    dispatch(loading());
-    const response = (await axios.get(`${baseURL}/users/1`)).data
-    // console.log(response);
+    if(user.password_confirmation){
+      response = (await axios.post(`${baseURL}/users`, user)).data
+    } else {
+      response = (await axios.post(`${baseURL}/login`, user)).data
+    }
+    console.log('login response', response)
     dispatch({
-      type: 'GOT_USER',
-      payload: response
+      type: "ADDED_CURRENT_USER",
+      payload: response.user
     })
   }
-  catch (e) {
+  catch(e) {
     console.log('server error', e.message)
   }
 }
+
+// export const doCreateNewUser = (user) => async dispatch => {
+//   try {
+//     const response = (await axios.post(`${baseURL}/users`, user)).data
+//     console.log('resonse', response)
+//     dispatch({
+//       type: "ADDED_CURRENT_USER",
+//       payload: response.user
+//     })
+//   }
+//   catch(e) {
+
+//   }
+// }
+
+// export const getUser = () => async dispatch => {
+//   try {
+//     dispatch(loading());
+//     const response = (await axios.get(`${baseURL}/users/1`)).data
+//     // console.log(response);
+//     dispatch({
+//       type: 'GOT_USER',
+//       payload: response
+//     })
+//   }
+//   catch (e) {
+//     console.log('server error', e.message)
+//   }
+// }
 
 
 export const addItem = (listItem) => async dispatch => {

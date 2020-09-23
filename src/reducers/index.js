@@ -8,20 +8,31 @@ export default function shoppingListReducer(
     curListItems: [],
     masterList: [],
     categories: [],
+    lists: [],
     notification: { error: false, message: '' },
     loading: false
   },
   action
 ) {
-  // console.log('From reducer', action)
+  // console.log('From reducer', action.payload)
   let idx;
   switch (action.type) {
+
+    case 'ADDED_CURRENT_USER':
+      // console.log(action.payload.categories)
+      return {
+        ...state, 
+        curUser: {email: action.payload.email, id: action.payload.id},
+        lists: action.payload.lists,
+        masterList: action.payload.items,
+        categories: action.payload.categories,
+        loading: false
+      }
     case 'GOT_USER':
       return {
-        ...state,
+        ...state, 
         curUser: action.payload.user,
-        curList: action.payload.curList,
-        curListItems: action.payload.curListItems,
+        lists: action.payload.lists,
         masterList: action.payload.items,
         categories: action.payload.categories,
         loading: false

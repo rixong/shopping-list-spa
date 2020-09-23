@@ -1,28 +1,28 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import Navbar from './Navbar';
-import Spinner from './Spinner';
-import ListHome from './ListHome';
-import CurrentList from './CurrentList';
-import AddItems from './AddItems';
-import EditMasterList from './EditMasterList';
-import CategorySortOrder from './CategorySortOrder';
+// import Navbar from './Navbar';
+// import Spinner from './Spinner';
+// import ListHome from './ListHome';
+// import CurrentList from './CurrentList';
+// import AddItems from './AddItems';
+// import EditMasterList from './EditMasterList';
+// import CategorySortOrder from './CategorySortOrder';
 import Login from './Login'
 
 
-import { getUser } from '../actions';
+import {  } from '../actions';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 
-const App = ({ loading, getUser }) => {
+const App = ({ loading}) => {
 
   const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
 
   useEffect(() => {
-    getUser()
+    // getUser()
 
-  }, [getUser])
+  }, [])
 
 
   return (
@@ -59,4 +59,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getUser })(App);
+export default connect(mapStateToProps, {  })(App);
