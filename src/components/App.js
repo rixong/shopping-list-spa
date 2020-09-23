@@ -1,35 +1,38 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-// import Navbar from './Navbar';
-// import Spinner from './Spinner';
-// import ListHome from './ListHome';
-// import CurrentList from './CurrentList';
-// import AddItems from './AddItems';
-// import EditMasterList from './EditMasterList';
-// import CategorySortOrder from './CategorySortOrder';
+import Navbar from './Navbar';
+import Spinner from './Spinner';
+import ListHome from './ListHome';
+import CurrentList from './CurrentList';
+import AddItems from './AddItems';
+import EditMasterList from './EditMasterList';
+import CategorySortOrder from './CategorySortOrder';
 import Login from './Login'
 
 
-import {  } from '../actions';
+import { doAutoLogin } from '../actions';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 
-const App = ({ loading}) => {
+const App = ({ loading, curUser, doAutoLogin}) => {
 
   const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
 
-  useEffect(() => {
-    // getUser()
 
-  }, [])
+  useEffect( () => {
+    if (localStorage.getItem('jwt') && !curUser) {
+      console.log('token exists!')
+      doAutoLogin()
+    }
+  },[doAutoLogin, curUser])
 
 
   return (
     <Router>
+        {!curUser || !localStorage.getItem('jwt') ? <Login/> : 
       <div className="container-fluid">
-        <Login/>
-        {/* <Navbar />
+        <Navbar />
         {loading ?
           <Spinner />
           :
@@ -47,16 +50,18 @@ const App = ({ loading}) => {
             </div>
           </Switch>
 
-        } */}
+        }
       </div>
+}
     </Router>
   )
 }
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.loading
+    loading: state.loading,
+    curUser: state.curUser
   }
 }
 
-export default connect(mapStateToProps, {  })(App);
+export default connect(mapStateToProps, { doAutoLogin })(App);

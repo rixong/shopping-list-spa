@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {config} from '../const';
+import { config } from '../const';
 
 const baseURL = config.url.API_URL
 
@@ -7,9 +7,8 @@ const baseURL = config.url.API_URL
 
 export const doLogin = (user) => async dispatch => {
   let response;
-  console.log('new', user)
   try {
-    if(user.password_confirmation){
+    if (user.password_confirmation) {
       response = (await axios.post(`${baseURL}/users`, user)).data
     } else {
       response = (await axios.post(`${baseURL}/login`, user)).data
@@ -19,41 +18,28 @@ export const doLogin = (user) => async dispatch => {
       type: "ADDED_CURRENT_USER",
       payload: response.user
     })
+    localStorage.setItem('jwt', response.jwt);
   }
-  catch(e) {
+  catch (e) {
     console.log('server error', e.message)
   }
 }
 
-// export const doCreateNewUser = (user) => async dispatch => {
-//   try {
-//     const response = (await axios.post(`${baseURL}/users`, user)).data
-//     console.log('resonse', response)
-//     dispatch({
-//       type: "ADDED_CURRENT_USER",
-//       payload: response.user
-//     })
-//   }
-//   catch(e) {
-
-//   }
-// }
-
-// export const getUser = () => async dispatch => {
-//   try {
-//     dispatch(loading());
-//     const response = (await axios.get(`${baseURL}/users/1`)).data
-//     // console.log(response);
-//     dispatch({
-//       type: 'GOT_USER',
-//       payload: response
-//     })
-//   }
-//   catch (e) {
-//     console.log('server error', e.message)
-//   }
-// }
-
+export const doAutoLogin = (token) => async dispatch => {
+  try {
+    console.log(token)
+    const response = (await axios.get(`${baseURL}/profile`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('jwt')}`}
+    })).data
+    dispatch({
+      type: "ADDED_CURRENT_USER",
+      payload: response.user
+    })
+  }
+  catch (e) {
+    console.log('server error', e.message)
+  }
+}
 
 export const addItem = (listItem) => async dispatch => {
   try {
@@ -118,11 +104,11 @@ export const changeStatus = (item) => async dispatch => {
   }
 }
 
-export const doReorderCategories = (userId, newOrder) => async dispatch=> {
+export const doReorderCategories = (userId, newOrder) => async dispatch => {
   console.log('from action', newOrder)
-await axios.post(`${baseURL}/categories`, {user_id: userId, order: newOrder.join(',')})
-  
-dispatch({
+  await axios.post(`${baseURL}/categories`, { user_id: userId, order: newOrder.join(',') })
+
+  dispatch({
     type: 'REORDERED_CATEGORIES',
     payload: newOrder
   })

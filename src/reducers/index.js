@@ -28,16 +28,6 @@ export default function shoppingListReducer(
         categories: action.payload.categories,
         loading: false
       }
-    case 'GOT_USER':
-      return {
-        ...state, 
-        curUser: action.payload.user,
-        lists: action.payload.lists,
-        masterList: action.payload.items,
-        categories: action.payload.categories,
-        loading: false
-      }
-
     case 'ADDED_ITEM_TO_CUR_LIST':
       return { ...state, curListItems: state.curListItems.concat(action.payload) }
     case 'REMOVED_ITEMS_FROM_CUR_LIST':

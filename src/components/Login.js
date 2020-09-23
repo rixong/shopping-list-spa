@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import { connect } from 'react-redux';
-import { doLogin } from '../actions';
+import { doLogin} from '../actions';
 
 
 const Login = ({ doLogin }) => {
@@ -14,6 +14,14 @@ const Login = ({ doLogin }) => {
     login: "Don't have an account?",
     newUser: "Already have an account?"
   }
+
+  // useEffect( () => {
+  //   console.log('Here!')
+  //   if (localStorage.getItem('jwt')) {
+  //     console.log('token exists!')
+  //     doAutoLogin(localStorage.getItem('jwt'))
+  //   }
+  // },[doAutoLogin])
 
   const onHandleChange = (e) => {
     // console.log(e.target.value)
