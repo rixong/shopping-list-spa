@@ -18,7 +18,6 @@ const App = ({ loading, curUser, doLogin }) => {
 
   useEffect(() => {
     if (localStorage.getItem('jwt') && !curUser) {
-      // console.log('token exists!')
       doLogin()
     }
   }, [doLogin, curUser])

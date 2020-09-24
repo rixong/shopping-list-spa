@@ -8,10 +8,13 @@ import ListGroup from './ListGroup'
 
 const CurrentList = ({ lists, curListItems, masterList, categories, doGetCurrentListItems }) => {
   const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+  
   const curList = lists.find(list => list.current)
 
   useEffect(() => {
+    if(curList){
     doGetCurrentListItems(curList.id)
+    }
   }, [doGetCurrentListItems, curList])
 
 
@@ -41,15 +44,25 @@ const CurrentList = ({ lists, curListItems, masterList, categories, doGetCurrent
 
   return (
     <div className="col-md overflow-auto bg-light" style={{ height: vh }}>
-
+      {!curList 
+      ? 
+      <div className="row h2 justify-content-center text-primary mt-4 mb-3 mx-2">
+        Make a new list
+      </div> 
+      : 
       <div className="row text-primary mt-4 mb-3 mx-2 align-items-end rounded">
         <div className="col">
-          <div className="h2 pt-2 text-right">{curList.name} </div>
+          <div className="h2 pt-2 text-right">
+            {curList.name}
+            </div>
         </div>
         <div className="col">
           <div className="h4 pb-1">{moment(curList.created_at).format('ddd, MMM Do')}</div>
         </div>
       </div>
+
+  }
+
       {divideByCategory()}
 
     </div>

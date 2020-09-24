@@ -29,7 +29,7 @@ const Login = ({ doLogin }) => {
   return (
     <div className="login-box bg-light mt-4 shadow-lg rounded">
       <div className="row mt-4 justify-content-center" style={{height:"100px"}}>
-        <img src="shopping-cart-logo.png" alt="cart" className="mt-5" style={{ width: "80px" }}></img>
+        <img src="shopping-cart-logo-lg.png" alt="cart" className="mt-5" style={{ width: "100px", height: "100px" }}></img>
       </div>
       <div className="display-3 text-center text-warning pt-5">Cart Compass</div>
       <div className="h3 text-center text-dark">Shop faster, shop smarter</div>
