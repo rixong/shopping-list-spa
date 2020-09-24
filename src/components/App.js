@@ -36,19 +36,20 @@ const App = ({ loading, curUser, doLogin }) => {
             <Spinner />
             :
             <Switch>
-              <Route exact path="/" component={ListHome}></Route>
-              <div className="row justify-content-center">
-                <div className="col-md pb-5 left-column">
-                  <Route exact path="/add" component={AddItems}></Route>
-                  <Route path="/edit" component={EditMasterList}></Route>
-                  <Route path="/sort" component={CategorySortOrder}></Route>
+              {/* <React.Fragment> */}
+                <Route exact path="/" component={ListHome}></Route>
+                <div className="row justify-content-center">
+                  <div className="col-md pb-5 left-column">
+                    <Route exact path="/add" component={AddItems}></Route>
+                    <Route path="/edit" component={EditMasterList}></Route>
+                    <Route path="/sort" component={CategorySortOrder}></Route>
+                  </div>
+                  <div className="col-md overflow-auto bg-light" style={{ height: vh }}>
+                    <CurrentList />
+                  </div>
                 </div>
-                <div className="col-md overflow-auto bg-light" style={{ height: vh }}>
-                  <CurrentList />
-                </div>
-              </div>
+              {/* </React.Fragment> */}
             </Switch>
-
           }
         </div>
       }

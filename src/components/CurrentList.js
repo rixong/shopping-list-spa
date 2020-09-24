@@ -1,10 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
 
+import {doGetCurrentListItems} from '../actions';
 import ListGroup from './ListGroup'
 
-const CurrentList = ({ curListItems, masterList, curList, categories }) => {
+
+const CurrentList = ({ lists, curListItems, masterList, categories, doGetCurrentListItems }) => {
+
+const curList = lists.find(list => list.current)
+
+useEffect(() => {
+  doGetCurrentListItems(curList.id)
+},[doGetCurrentListItems])
+
 
   const divideByCategory = () => {
 
@@ -51,9 +60,10 @@ const mapStateToProps = state => {
   return {
     curListItems: state.curListItems,
     masterList: state.masterList,
-    curList: state.curList,
-    categories: state.categories
+    // curList: state.curList,
+    categories: state.categories,
+    lists: state.lists
   }
 };
 
-export default connect(mapStateToProps)(CurrentList);
+export default connect(mapStateToProps, {doGetCurrentListItems})(CurrentList);

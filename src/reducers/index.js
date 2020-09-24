@@ -27,6 +27,8 @@ export default function shoppingListReducer(
         categories: action.payload.categories,
         loading: false
       }
+    case 'ADDED_LIST_ITEMS':
+      return {...state, curListItems: action.payload}
     case 'ADDED_ITEM_TO_CUR_LIST':
       return { ...state, curListItems: state.curListItems.concat(action.payload) }
     case 'REMOVED_ITEMS_FROM_CUR_LIST':
