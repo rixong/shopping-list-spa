@@ -2,7 +2,6 @@
 
 const initialState = {
   curUser: null,
-  curList: {},
   curListItems: [],
   masterList: [],
   categories: [],
@@ -28,7 +27,7 @@ export default function shoppingListReducer(
         loading: false
       }
     case 'ADDED_LIST_ITEMS':
-      return {...state, curListItems: action.payload}
+      return { ...state, curListItems: action.payload }
     case 'ADDED_ITEM_TO_CUR_LIST':
       return { ...state, curListItems: state.curListItems.concat(action.payload) }
     case 'REMOVED_ITEMS_FROM_CUR_LIST':
@@ -58,7 +57,6 @@ export default function shoppingListReducer(
         temp.sort_order = idx;
         return temp;
       })
-      console.log(reorder)
       return { ...state, categories: reorder }
 
     case 'ADDED_NOTIFICATION':
@@ -70,7 +68,7 @@ export default function shoppingListReducer(
     case 'FINISHED_LOADING':
       return { ...state, loading: false }
     case 'USER_CLEARED':
-      return {...initialState}
+      return { ...initialState }
     default:
       return state
   }

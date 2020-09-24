@@ -4,7 +4,7 @@ import CurrentList from './CurrentList'
 const ListHome = () => {
   return (
     <div className="container bg-light rounded list-home">
-      <CurrentList></CurrentList>
+      <CurrentList/>
     </div>
   )
 }

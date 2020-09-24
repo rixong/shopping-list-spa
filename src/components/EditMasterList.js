@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { XCircleFillIcon } from '@primer/octicons-react'
 
-import { removeFromMasterList } from '../actions';
+import { doRemoveFromMasterList } from '../actions';
 
-const EditMasterList = ({ masterList, categories, removeFromMasterList }) => {
+const EditMasterList = ({ masterList, categories, doRemoveFromMasterList }) => {
 
   return (
     <React.Fragment>
@@ -23,7 +23,7 @@ const EditMasterList = ({ masterList, categories, removeFromMasterList }) => {
                   type="button"
                   className="close"
                   aria-label="Delete"
-                  onClick={() => removeFromMasterList(item.id)}
+                  onClick={() => doRemoveFromMasterList(item.id)}
                 >
                   <XCircleFillIcon size={24} />
                 </button>
@@ -43,4 +43,4 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps, { removeFromMasterList })(EditMasterList);
+export default connect(mapStateToProps, { doRemoveFromMasterList })(EditMasterList);

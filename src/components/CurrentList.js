@@ -12,7 +12,7 @@ const curList = lists.find(list => list.current)
 
 useEffect(() => {
   doGetCurrentListItems(curList.id)
-},[doGetCurrentListItems])
+},[doGetCurrentListItems, curList])
 
 
   const divideByCategory = () => {

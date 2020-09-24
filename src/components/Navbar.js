@@ -12,11 +12,11 @@ const Navbar = ({doClearUser}) => {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark pt-4">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark pt-2">
       <Link className="nav-link" to="/">
         <div className="h2 text-success" >
           Cart Compass
-          <img src='/shopping-cart-logo.png' alt="shopping cart" style={{ width: '50px' }}></img>
+          <img src='/shopping-cart-logo.png' alt="shopping cart" style={{ width: '35px' }}></img>
         </div></Link>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>

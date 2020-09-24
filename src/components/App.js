@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Navbar from './Navbar';
 import Spinner from './Spinner';
-import ListHome from './ListHome';
+import ListHome from './ListHome'
 import CurrentList from './CurrentList';
 import AddItems from './AddItems';
 import EditMasterList from './EditMasterList';
@@ -40,7 +40,7 @@ const App = ({ loading, curUser, doLogin }) => {
                 <Route exact path="/" component={ListHome}></Route>
                 <div className="row justify-content-center">
                   <div className="col-md pb-5 left-column">
-                    <Route exact path="/add" component={AddItems}></Route>
+                    <Route path="/add" component={AddItems}></Route>
                     <Route path="/edit" component={EditMasterList}></Route>
                     <Route path="/sort" component={CategorySortOrder}></Route>
                   </div>

@@ -9,13 +9,15 @@ const AddItems = ({
   addNotification,
   clearNotification,
   masterList,
-  curList,
+  lists,
   curUser,
   categories,
   notification
 }) => {
 
   const queryDefault = { name: '', quantity: '', category: 0 }
+
+  const curList = lists.find(list => list.current)
 
   const [queryTerm, setQueryTerm] = useState(queryDefault)
   const [searchResults, setSearchResults] = useState([]);
@@ -143,7 +145,7 @@ const AddItems = ({
 const mapStateToProps = state => {
   return {
     curUser: state.curUser,
-    curList: state.curList,
+    lists: state.lists,
     masterList: state.masterList,
     categories: state.categories,
     notification: state.notification

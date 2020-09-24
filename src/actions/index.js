@@ -92,12 +92,14 @@ export const addItem = (listItem) => async dispatch => {
   }
 }
 
-const removeItemFromCurList = (itemId) => {
+
+export const doRemoveItemFromCurList = (itemId) => {
   return {
     type: 'REMOVED_ITEMS_FROM_CUR_LIST',
     payload: itemId
   }
 }
+
 
 export const addItemToMasterList = (item, user_id, list_id) => async dispatch => {
   try {
@@ -143,10 +145,10 @@ export const doReorderCategories = (userId, newOrder) => async dispatch => {
   })
 }
 
-export const removeFromMasterList = (itemId) => async dispatch => {
+export const doRemoveFromMasterList = (itemId) => async dispatch => {
   try {
     await axios.delete(`${baseURL}/items/${itemId}`)
-    dispatch(removeItemFromCurList(itemId))
+    dispatch(doRemoveItemFromCurList(itemId))
     dispatch({
       type: 'REMOVED_FROM_MASTER_LIST',
       payload: itemId
