@@ -21,7 +21,7 @@ const Login = ({ doLogin }) => {
 
   const onHandleSubmit = (e) => {
     e.preventDefault()
-    console.log('from login', inputText)
+    // console.log('from login', inputText)
     doLogin(inputText)
     setInputText(inputTextDefault)
   }

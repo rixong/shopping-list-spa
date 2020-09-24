@@ -7,25 +7,25 @@ const baseURL = config.url.API_URL
 
 export const doLogin = (user = 'token') => async dispatch => {
   let response;
-  console.log('from action', user)
+  // console.log('from action', user)
   dispatch({ type: 'STARTED_LOADING' });
   try {
     if (user === 'token') {
-      console.log('Auto-login')
+      // console.log('Auto-login')
       response = (await axios.get(`${baseURL}/profile`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('jwt')}` }
       })).data
     } else {
       if (user.password_confirmation) {
-        console.log('New user')
+        // console.log('New user')
         response = (await axios.post(`${baseURL}/users`, user)).data
       } else {
-        console.log('Login')
+        // console.log('Login')
         response = (await axios.post(`${baseURL}/login`, user)).data
       }
       localStorage.setItem('jwt', response.jwt);
     }
-    console.log('login response', response)
+    // console.log('login response', response)
     dispatch({
       type: "ADDED_CURRENT_USER",
       payload: response.user
@@ -42,7 +42,7 @@ export const doLogin = (user = 'token') => async dispatch => {
 export const doGetCurrentListItems = (list_id) => async dispatch => {
   try {
     const response = (await axios.get(`${baseURL}/lists/current/${list_id}`)).data
-    console.log('get list', response)
+    // console.log('get list', response)
     dispatch({
       type: 'ADDED_LIST_ITEMS',
       payload: response
@@ -136,7 +136,7 @@ export const changeStatus = (item) => async dispatch => {
 }
 
 export const doReorderCategories = (userId, newOrder) => async dispatch => {
-  console.log('from action', newOrder)
+  // console.log('from action', newOrder)
   await axios.post(`${baseURL}/categories`, { user_id: userId, order: newOrder.join(',') })
 
   dispatch({
@@ -166,7 +166,6 @@ export const doClearUser = () => {
 }
 
 export const addNotification = (message) => {
-  // console.log("Add note")
   return {
     type: 'ADDED_NOTIFICATION',
     payload: { error: true, message }
@@ -174,7 +173,6 @@ export const addNotification = (message) => {
 }
 
 export const clearNotification = () => {
-  console.log("clear message")
   return {
     type: 'CLEARED_NOTIFICATION',
     payload: { error: false, message: '' }

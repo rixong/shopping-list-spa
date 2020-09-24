@@ -65,7 +65,7 @@ const AddItems = ({
   }
 
   return (
-    <div>
+    <React.Fragment>
 
       <div className="header">Add items</div>
       <form>
@@ -138,7 +138,7 @@ const AddItems = ({
 
       </form>
       {notification.error ? <Alert /> : null}
-    </div>
+    </React.Fragment>
   )
 }
 

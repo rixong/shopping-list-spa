@@ -1,18 +1,18 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
 
-import {doGetCurrentListItems} from '../actions';
+import { doGetCurrentListItems } from '../actions';
 import ListGroup from './ListGroup'
 
 
 const CurrentList = ({ lists, curListItems, masterList, categories, doGetCurrentListItems }) => {
+  const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+  const curList = lists.find(list => list.current)
 
-const curList = lists.find(list => list.current)
-
-useEffect(() => {
-  doGetCurrentListItems(curList.id)
-},[doGetCurrentListItems, curList])
+  useEffect(() => {
+    doGetCurrentListItems(curList.id)
+  }, [doGetCurrentListItems, curList])
 
 
   const divideByCategory = () => {
@@ -40,7 +40,7 @@ useEffect(() => {
   }
 
   return (
-    <div>
+    <div className="col-md overflow-auto bg-light" style={{ height: vh }}>
 
       <div className="row text-primary mt-4 mb-3 mx-2 align-items-end rounded">
         <div className="col">
@@ -66,4 +66,4 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps, {doGetCurrentListItems})(CurrentList);
+export default connect(mapStateToProps, { doGetCurrentListItems })(CurrentList);

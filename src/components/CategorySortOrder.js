@@ -21,7 +21,7 @@ const CategorySortOrder = ({ categories, curUser, doReorderCategories }) => {
   });
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
-    console.log(oldIndex, newIndex)
+    // console.log(oldIndex, newIndex)
     const newOrder = arrayMove(categories, oldIndex, newIndex)
     const ids = newOrder.map(el => el.id)
     doReorderCategories(curUser.id, ids)
