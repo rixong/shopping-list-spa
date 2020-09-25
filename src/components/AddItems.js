@@ -4,20 +4,15 @@ import Alert from './Alert';
 
 import { addItemToMasterList, addNotification, clearNotification } from '../actions';
 
+
 const AddItems = ({
-  addItemToMasterList,
-  addNotification,
-  clearNotification,
-  masterList,
-  lists,
-  curUser,
-  categories,
-  notification
+  addItemToMasterList, addNotification, clearNotification, masterList, lists, curUser, categories, notification
 }) => {
+
+  const curList = lists.find(list => list.id === curUser.currentList)
 
   const queryDefault = { name: '', quantity: '', category: 0 }
 
-  const curList = lists.find(list => list.current)
 
   const [queryTerm, setQueryTerm] = useState(queryDefault)
   const [searchResults, setSearchResults] = useState([]);

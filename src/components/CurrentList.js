@@ -6,10 +6,10 @@ import { doGetCurrentListItems } from '../actions';
 import ListGroup from './ListGroup'
 
 
-const CurrentList = ({ lists, curListItems, masterList, categories, doGetCurrentListItems }) => {
+const CurrentList = ({ curUser, lists, curListItems, masterList, categories, doGetCurrentListItems }) => {
   const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
   
-  const curList = lists.find(list => list.current)
+  const curList = lists.find(list => list.id === curUser.currentList)
 
   useEffect(() => {
     if(curList){
@@ -75,7 +75,8 @@ const mapStateToProps = state => {
     masterList: state.masterList,
     // curList: state.curList,
     categories: state.categories,
-    lists: state.lists
+    lists: state.lists,
+    curUser: state.curUser
   }
 };
 

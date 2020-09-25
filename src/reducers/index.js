@@ -20,12 +20,22 @@ export default function shoppingListReducer(
     case 'ADDED_CURRENT_USER':
       return {
         ...state,
-        curUser: { email: action.payload.email, id: action.payload.id },
+        curUser: { email: action.payload.email, id: action.payload.id, currentList: action.payload.current_list },
         lists: action.payload.lists,
         masterList: action.payload.items,
         categories: action.payload.categories,
         loading: false
       }
+    case 'CHANGED_CURRENT_LIST':
+      const tempUser = Object.assign({}, state.curUser)
+      tempUser.currentList = action.payload
+      return {...state, curUser: tempUser}
+    case 'ADDED_NEW_LIST':
+      return {...state, lists: state.lists.concat(action.payload)}
+    case 'REMOVED_LIST':
+      idx = state.lists.findIndex(list => list.id === action.payload)
+      console.log('reducer',idx)
+      return {...state, lists: state.lists.slice(0, idx).concat(state.lists.slice(idx+1))}
     case 'ADDED_LIST_ITEMS':
       return { ...state, curListItems: action.payload }
     case 'ADDED_ITEM_TO_CUR_LIST':

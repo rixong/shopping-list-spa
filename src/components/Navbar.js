@@ -32,6 +32,9 @@ const Navbar = ({doClearUser}) => {
           <li className="nav-item">
             <Link className="nav-link" to="/edit">My Items</Link>
           </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/mylists">My Lists</Link>
+          </li>
           <li className="nav-item ">
             <div className="nav-link" role='button' onClick={onLogout}>Logout</div>
           </li>
