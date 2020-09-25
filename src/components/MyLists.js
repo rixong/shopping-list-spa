@@ -8,7 +8,6 @@ import { doCreateNewList, doRemoveList, doChangeCurrentList } from '../actions';
 const MyLists = ({ curUser, lists, doCreateNewList, doRemoveList, doChangeCurrentList }) => {
 
   const sortedLists = [...lists].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-  console.log('hereeeeee')
   const [queryTerm, setQueryTerm] = useState('');
 
   const onHandleChange = (e) => {

@@ -14,7 +14,7 @@ const Navbar = ({doClearUser}) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark pt-2">
       <Link className="nav-link" to="/">
-        <div className="h2 text-success" >
+        <div className="h2 text-light" >
           Cart Compass
           <img src='/shopping-cart-logo-lg.png' alt="shopping cart" style={{ width: "50px", height: "80px" }}></img>
         </div></Link>

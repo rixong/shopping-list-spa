@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import Alert from './Alert';
+import MyLists from './MyLists'
 
 import { addItemToMasterList, addNotification, clearNotification } from '../actions';
 
@@ -62,7 +63,7 @@ const AddItems = ({
   return (
     <React.Fragment>
 
-      <div className="header">Add items</div>
+  <div className="header">Add items to <span className="text-primary">{curList.name}</span> list</div>
       <form>
         <div className="row">
           <div className="col-md-5 mb-3">
@@ -133,6 +134,8 @@ const AddItems = ({
 
       </form>
       {notification.error ? <Alert /> : null}
+      <hr></hr>
+      <MyLists />
     </React.Fragment>
   )
 }

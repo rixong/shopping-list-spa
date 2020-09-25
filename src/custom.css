@@ -3,7 +3,7 @@
 }
 
 .header {
-  font-size: 3em;
+  font-size: 2.5em;
   font-weight: 300;
   margin:10px 0;
   text-align: center;
@@ -45,6 +45,6 @@
   cursor: pointer;
 }
 
-svg {
+/* svg {
   fill: red;
-}
+} */
