@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 import AddItems from './AddItems';
 import EditMasterList from './EditMasterList';
 import CategorySortOrder from './CategorySortOrder';
-import MyLists from './MyLists';
+// import MyLists from './MyLists';
 
 import CurrentList from './CurrentList';
 
@@ -17,7 +17,7 @@ const SplitPanels = () => {
           <Route path="/add" component={AddItems}></Route>
           <Route path="/edit" component={EditMasterList}></Route>
           <Route path="/sort" component={CategorySortOrder}></Route>
-          <Route path="/mylists" component={MyLists}></Route>
+          {/* <Route path="/mylists" component={MyLists}></Route> */}
         </Switch>
       </div>
       <CurrentList />

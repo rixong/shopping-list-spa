@@ -26,7 +26,7 @@ const App = ({ loading, curUser, doLogin }) => {
   return (
     <Router>
       {!curUser && !loading ? <Login /> :
-        <div className="container-fluid">
+        <div className="container-fluid bg-dark">
           <Navbar />
           {loading ?
             <Spinner />

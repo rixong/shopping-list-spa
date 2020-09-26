@@ -41,7 +41,6 @@ export const doLogin = (user = 'token') => async dispatch => {
 export const doGetCurrentListItems = (list_id) => async dispatch => {
   try {
     const response = (await axios.get(`${baseURL}/lists/current/${list_id}`)).data
-    console.log('get list', response)
     dispatch({
       type: 'ADDED_LIST_ITEMS',
       payload: response
@@ -51,23 +50,6 @@ export const doGetCurrentListItems = (list_id) => async dispatch => {
     console.log('server error', e.message)
   }
 }
-
-// export const doAutoLogin = (token) => async dispatch => {
-//   dispatch({ type: 'STARTED_LOADING' });
-//   try {
-//     const response = (await axios.get(`${baseURL}/profile`, {
-//       headers: { Authorization: `Bearer ${localStorage.getItem('jwt')}` }
-//     })).data
-//     dispatch({
-//       type: "ADDED_CURRENT_USER",
-//       payload: response.user
-//     })
-//   }
-//   catch (e) {
-//     console.log('server error', e.message)
-//   }
-//   dispatch({ type: 'FINISHED_LOADING' });
-// }
 
 export const doCreateNewList = (name) => async dispatch => {
   try {
@@ -107,7 +89,7 @@ catch (e){
 }
 
 export const doRemoveList = (listId) => async dispatch => {
-  console.log("Action")
+  
   try {
     const response = (await axios.delete(`${baseURL}/lists/${listId}`)).data
     console.log('List deleted!', response)
@@ -117,7 +99,7 @@ export const doRemoveList = (listId) => async dispatch => {
     })
   }
   catch(e){
-    console.log('server error', e.message)
+    console.log('Remove list - server error', e.message)
   }
 }
 

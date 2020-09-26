@@ -14,7 +14,7 @@ const Navbar = ({doClearUser}) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark pt-2">
       <Link className="nav-link" to="/">
-        <div className="h2 text-light" >
+        <div className="h2 text-warning" >
           Cart Compass
           <img src='/shopping-cart-logo-lg.png' alt="shopping cart" style={{ width: "50px", height: "80px" }}></img>
         </div></Link>
@@ -32,9 +32,9 @@ const Navbar = ({doClearUser}) => {
           <li className="nav-item">
             <Link className="nav-link" to="/edit">My Items</Link>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link className="nav-link" to="/mylists">My Lists</Link>
-          </li>
+          </li> */}
           <li className="nav-item ">
             <div className="nav-link" role='button' onClick={onLogout}>Logout</div>
           </li>

@@ -16,7 +16,7 @@ const ListItem = ({ item, changeStatus, masterList }) => {
   const nameClassDefault = 'row'
   const nameClassFinal = item.active ?
     `${nameClassDefault} text-dark`
-    : `${nameClassDefault} text-warning strike font-weight-normal`
+    : `${nameClassDefault} text-success strike font-weight-normal`
 
   return (
     <li className="list-group-item bg-light py-1 mb-1 h5" role="button" onClick={onHandleClick}>

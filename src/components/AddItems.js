@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import Alert from './Alert';
-import MyLists from './MyLists'
+// import MyLists from './MyLists';
+import Collapse from './Collapse';
 
 import { addItemToMasterList, addNotification, clearNotification } from '../actions';
 
@@ -19,7 +20,7 @@ const AddItems = ({
   const [searchResults, setSearchResults] = useState([]);
 
   const onHandleChange = (e) => {
-    // clearNotification(); TODO - CLEAR FIELDS AFTER ERRORS
+    clearNotification()
     let value = e.target.value
     setQueryTerm({ ...queryTerm, [e.target.name]: value.toLowerCase() })
     if (value !== '') {
@@ -134,8 +135,7 @@ const AddItems = ({
 
       </form>
       {notification.error ? <Alert /> : null}
-      <hr></hr>
-      <MyLists />
+      <Collapse />
     </React.Fragment>
   )
 }
