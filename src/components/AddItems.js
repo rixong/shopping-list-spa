@@ -66,7 +66,7 @@ const AddItems = ({
 
   <div className="header">Add items to <span className="text-primary">{curList.name}</span> list</div>
       <form>
-        <div className="row">
+        <div className="row mb-5">
           <div className="col-md-5 mb-3">
             <input
               className="form-control"
@@ -129,12 +129,12 @@ const AddItems = ({
               </div>
             </div>
           </div>
-
         </div>
 
 
       </form>
       {notification.error ? <Alert /> : null}
+      <p className="display-3 text-primary text-center">&mdash;</p>
       <Collapse />
     </React.Fragment>
   )

@@ -10,17 +10,17 @@ import SplitPanels from './SplitPanels'
 
 
 
-import { doLogin } from '../actions';
+import { doAutoLogin } from '../actions';
 
 
-const App = ({ loading, curUser, doLogin }) => {
+const App = ({ loading, curUser, doAutoLogin }) => {
 
 
   useEffect(() => {
     if (localStorage.getItem('jwt') && !curUser) {
-      doLogin()
+      doAutoLogin()
     }
-  }, [doLogin, curUser])
+  }, [doAutoLogin, curUser])
 
 
   return (
@@ -49,4 +49,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { doLogin })(App);
+export default connect(mapStateToProps, { doAutoLogin })(App);

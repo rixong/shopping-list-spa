@@ -47,12 +47,11 @@ const MyLists = ({ curUser,
     }
   }
 
-  const defaultClass = "list-group-item d-flex justify-content-between pl-0 py-2"
+  const defaultClass = "list-group-item d-flex justify-content-between pl-0"
 
   return (
-    <div className="mylist-box">
+    <div className="">
 
-      <div className="header">My lists</div>
       <ul className="list-group">
         {sortedLists.map(list =>
           (<li
@@ -80,7 +79,7 @@ const MyLists = ({ curUser,
 
       <hr></hr>
 
-      <div className="header">Make a new list</div>
+      <div className="h4 text-center">Make a new list</div>
       <form>
         <div className="input-group">
           <input

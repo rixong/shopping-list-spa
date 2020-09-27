@@ -1,12 +1,17 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { doLogin} from '../actions';
+
+import { doLogin } from '../actions';
+import Alert from './Alert';
 
 
-const Login = ({ doLogin }) => {
+const Login = ({ notification, doLogin }) => {
 
   const inputTextDefault = { email: '', password: '', password_confirmation: '' }
 
+  const [passwordError, setPasswordError] = useState('')
+  const [emailError, setEmailError] = useState('')
   const [formType, setFormType] = useState('login');
   const [inputText, setInputText] = useState(inputTextDefault)
 
@@ -16,19 +21,34 @@ const Login = ({ doLogin }) => {
   }
 
   const onHandleChange = (e) => {
+    setPasswordError('');
+    setEmailError('');
     setInputText({ ...inputText, [e.target.name]: e.target.value })
   }
 
   const onHandleSubmit = (e) => {
     e.preventDefault()
-    // console.log('from login', inputText)
-    doLogin(inputText)
-    setInputText(inputTextDefault)
+    const expression = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    let validEmail = expression.test(inputText.email.toLowerCase());
+    if (!validEmail) {
+      setEmailError('Please enter a valid email')
+    }
+    else if (inputText.password.trim() === '') {
+      setPasswordError('Please enter a valid password')
+    }
+    // else if (formType==='newUser' && (inputText.password !== inputText.password_confirmation)) {
+    //   setPasswordError('Passwords must match')
+    // } 
+    else {
+      doLogin(inputText)
+      setInputText(inputTextDefault)
+      return <Redirect to="/" />
+    }
   }
 
   return (
     <div className="login-box bg-light mt-4 shadow-lg rounded">
-      <div className="row mt-4 justify-content-center" style={{height:"100px"}}>
+      <div className="row mt-4 justify-content-center" style={{ height: "100px" }}>
         <img src="shopping-cart-logo-lg.png" alt="cart" className="mt-5" style={{ width: "100px", height: "100px" }}></img>
       </div>
       <div className="display-3 text-center text-warning pt-5">Cart Compass</div>
@@ -36,31 +56,61 @@ const Login = ({ doLogin }) => {
 
       <form>
         <div className="form-group login-form">
+      
           <input
             type="email"
             name="email"
-            className="form-control form-control-lg my-3"
+            className={
+              emailError
+                ? "form-control form-control-lg is-invalid"
+                : "form-control form-control-lg"
+            }
             aria-describedby="emailHelp"
             placeholder="Email"
             value={inputText.email}
             onChange={(e) => onHandleChange(e)}
           ></input>
+          <div
+            className={
+              emailError ? "inline-errormsg text-danger" : "hidden"
+            }
+          >
+            {emailError}
+          </div>
+
 
           <input
             type="password"
             name="password"
-            className="form-control form-control-lg mb-3"
+            className={
+              passwordError
+                ? "form-control form-control-lg mt-3 is-invalid"
+                : "form-control form-control-lg mt-3"
+            }
             aria-describedby="passwordHelp"
             placeholder="Password"
             value={inputText.password}
             onChange={(e) => onHandleChange(e)}
           ></input>
 
+          <div
+            className={
+              passwordError ? "inline-errormsg text-danger" : "hidden"
+            }
+          >
+            {passwordError}
+          </div>
+
+
           {formType === 'newUser' ?
             <input
               type="password"
               name="password_confirmation"
-              className="form-control form-control-lg mb-3"
+              className={
+                passwordError
+                  ? "form-control form-control-lg mt-3 is-invalid"
+                  : "form-control form-control-lg mt-3"
+              }
               aria-describedby="passwordHelp"
               placeholder="Confirm password"
               value={inputText.password_confirmation}
@@ -69,9 +119,10 @@ const Login = ({ doLogin }) => {
 
             : null
           }
-          <button className="btn btn-primary btn-lg w-100" onClick={(e) => onHandleSubmit(e)}>Continue</button>
+          <button className="btn btn-primary btn-lg mt-3 w-100" type="submit" onClick={(e) => onHandleSubmit(e)}>Continue</button>
         </div>
       </form>
+          { notification.error ? <Alert/> : null }
 
       <div className="login-switch d-block">
         <p className="text-center">{message[formType]}</p>
@@ -87,4 +138,10 @@ const Login = ({ doLogin }) => {
   )
 }
 
-export default connect(null, { doLogin })(Login);
+const mapStateToProps = state => {
+  return {
+    notification: state.notification
+  }
+};
+
+export default connect(mapStateToProps, { doLogin })(Login);
