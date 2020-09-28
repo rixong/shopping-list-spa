@@ -4,12 +4,17 @@ import Alert from './Alert';
 // import MyLists from './MyLists';
 import Collapse from './Collapse';
 
-import { addItemToMasterList, addNotification, clearNotification } from '../actions';
+import { doAddItemToMasterList, addNotification, clearNotification } from '../actions';
 
 
 const AddItems = ({
-  addItemToMasterList, addNotification, clearNotification, masterList, lists, curUser, categories, notification
-}) => {
+  doAddItemToMasterList, 
+  addNotification, 
+  clearNotification, 
+  masterList, lists, 
+  curUser, 
+  categories, 
+  notification }) => {
 
   const curList = lists.find(list => list.id === curUser.currentList)
 
@@ -52,7 +57,7 @@ const AddItems = ({
 
     const trimmedName = queryTerm.name.trim().toLowerCase();
 
-    addItemToMasterList({
+    doAddItemToMasterList({
       name: trimmedName,
       category_id: queryTerm.category,
       quantity: queryTerm.quantity,
@@ -150,4 +155,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { addNotification, clearNotification, addItemToMasterList })(AddItems);
+export default connect(mapStateToProps, { addNotification, clearNotification, doAddItemToMasterList })(AddItems);

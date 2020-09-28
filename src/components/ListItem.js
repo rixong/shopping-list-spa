@@ -1,13 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {changeStatus} from '../actions';
+import {doChangeItemStatus} from '../actions';
 
 
-const ListItem = ({ item, changeStatus, masterList }) => {
+const ListItem = ({ item, doChangeItemStatus, masterList }) => {
 
   const onHandleClick = () => {
     // console.log('Clicked', item.name);
-    changeStatus(item);
+    doChangeItemStatus(item);
   }
 
   const name = masterList.find(el => item.item_id === el.id).name
@@ -34,4 +34,4 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps, {changeStatus} )(ListItem);
+export default connect(mapStateToProps, {doChangeItemStatus} )(ListItem);

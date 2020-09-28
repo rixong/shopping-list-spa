@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { doLogin } from '../actions';
+import { doLogin, clearNotification } from '../actions';
 import Alert from './Alert';
 
 
-const Login = ({ notification, doLogin }) => {
+const Login = ({ notification, doLogin, clearNotification }) => {
 
   const inputTextDefault = { email: '', password: '', password_confirmation: '' }
 
@@ -36,9 +36,6 @@ const Login = ({ notification, doLogin }) => {
     else if (inputText.password.trim() === '') {
       setPasswordError('Please enter a valid password')
     }
-    // else if (formType==='newUser' && (inputText.password !== inputText.password_confirmation)) {
-    //   setPasswordError('Passwords must match')
-    // } 
     else {
       doLogin(inputText)
       setInputText(inputTextDefault)
@@ -69,6 +66,7 @@ const Login = ({ notification, doLogin }) => {
             placeholder="Email"
             value={inputText.email}
             onChange={(e) => onHandleChange(e)}
+            onFocus={() => clearNotification()}
           ></input>
           <div
             className={
@@ -91,6 +89,7 @@ const Login = ({ notification, doLogin }) => {
             placeholder="Password"
             value={inputText.password}
             onChange={(e) => onHandleChange(e)}
+            onFocus={() => clearNotification()}
           ></input>
 
           <div
@@ -115,6 +114,7 @@ const Login = ({ notification, doLogin }) => {
               placeholder="Confirm password"
               value={inputText.password_confirmation}
               onChange={(e) => onHandleChange(e)}
+              onFocus={() => clearNotification()}
             ></input>
 
             : null
@@ -144,4 +144,4 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps, { doLogin })(Login);
+export default connect(mapStateToProps, { doLogin, clearNotification })(Login);
