@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { config } from '../const';
+// import instance frrm '../'
 
 const baseURL = config.url.API_URL
 
