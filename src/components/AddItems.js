@@ -68,7 +68,8 @@ const AddItems = ({
 
   return (
     <React.Fragment>
-
+      <Collapse />
+      <p className="h4 text-warning text-center">&mdash;&mdash;</p>
       <div className="header">Add items to <span className="text-primary">{curList.name}</span></div>
       <form>
         <div className="row mb-2">
@@ -136,9 +137,7 @@ const AddItems = ({
         </div>
 
       </form>
-      <p className="h4 text-warning text-center">&mdash;&mdash;</p>
       {notification.error ? <Alert /> : null}
-      <Collapse />
     </React.Fragment>
   )
 }

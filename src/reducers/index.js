@@ -65,9 +65,9 @@ export default function shoppingListReducer(
       return { ...state, curListItems: tempItem }
     case 'CHANGED_ITEMS_STATUS':
       idx = state.curListItems.findIndex(item => item.item_id === action.payload.item_id)
-      if (!idx) {
-        idx = state.curListItems[0].id
-      }
+      // if (!idx) {
+      //   idx = state.curListItems[0].id
+      // }
       return {
         ...state, curListItems:
           [...state.curListItems.slice(0, idx), action.payload, ...state.curListItems.slice(idx + 1)]

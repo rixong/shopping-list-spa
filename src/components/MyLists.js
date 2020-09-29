@@ -59,7 +59,7 @@ const MyLists = ({ curUser,
       <ul className="list-group">
         {sortedLists.map(list =>
           (<li
-            className={`${defaultClass} ${list.id === curUser.currentList ? 'bg-info' : null}`}
+            className={`${defaultClass} ${list.id === curUser.currentList ? 'bg-dark text-info' : 'text-info'}`}
             key={list.id}
             role="button"
             onClick={() => onSelectList(list.id)}
@@ -67,16 +67,18 @@ const MyLists = ({ curUser,
             <div className="col-10">
               <strong>{list.name}</strong> - {moment(list.created_at).format('ddd, MMM Do')}
             </div>
-            <div className="col-2">
-              <button
-                type="button"
-                className="close"
-                aria-label="Delete"
-                onClick={(e) => onClickDeleteList(e, list.id)}
-              >
-                <XCircleFillIcon size={24} />
-              </button>
-            </div>
+            {list.id === curUser.currentList ? null :
+              <div className="col-2">
+                <button
+                  type="button"
+                  className="close"
+                  aria-label="Delete"
+                  onClick={(e) => onClickDeleteList(e, list.id)}
+                >
+                  <XCircleFillIcon size={24} />
+                </button>
+              </div>
+            }
           </li>)
         )}
       </ul>
