@@ -29,8 +29,12 @@ const MyLists = ({ curUser,
 
   const onHandleSubmit = (e) => {
     e.preventDefault()
-    doCreateNewList(queryTerm)
-    setQueryTerm('')
+    if (!queryTerm.trim()) {
+      addNotification('Enter a name for the list.')
+    } else {
+      doCreateNewList(queryTerm)
+      setQueryTerm('')
+    }
   }
 
   const onSelectList = (listId) => {
@@ -50,7 +54,7 @@ const MyLists = ({ curUser,
   const defaultClass = "list-group-item d-flex justify-content-between pl-0"
 
   return (
-    <div className="">
+    <React.Fragment>
 
       <ul className="list-group">
         {sortedLists.map(list =>
@@ -79,7 +83,7 @@ const MyLists = ({ curUser,
 
       <hr></hr>
 
-      <div className="h4 text-center">Make a new list</div>
+      {/* <div className="h4 text-center">Make a new list</div> */}
       <form>
         <div className="input-group">
           <input
@@ -89,15 +93,19 @@ const MyLists = ({ curUser,
             placeholder="list name..."
             value={queryTerm}
             onChange={(e) => onHandleChange(e)}
-            // onFocus={() => clearNotification()}
+            onFocus={() => clearNotification()}
             name="name"
             aria-label="enter list name"
-            required
           ></input>
         </div>
-        <button className="btn btn-primary btn-lg w-100 mt-3" onClick={(e) => onHandleSubmit(e)}>Add List</button>
+        <button 
+          className="btn btn-outline-primary btn-lg w-100 mt-3" 
+          onClick={(e) => onHandleSubmit(e)}
+        >
+          Make a new list
+        </button>
       </form>
-    </div>
+    </React.Fragment>
   )
 }
 

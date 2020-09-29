@@ -4,11 +4,11 @@ import {connect} from 'react-redux';
 
 import {doLogoutUser} from '../actions';
 
-const Navbar = ({doClearUser}) => {
+const Navbar = ({doLogoutUser}) => {
 
   const onLogout = () => {
-    localStorage.removeItem('jwt')
     doLogoutUser()
+    localStorage.removeItem('jwt')
   }
 
   return (

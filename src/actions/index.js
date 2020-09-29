@@ -202,10 +202,10 @@ export const doRemoveItemFromCurList = (itemId) => {
 export const doChangeItemStatus = (item) => async dispatch => {
   try {
     const response = (await instance.patch(`/list_items/${item.id}`)).data
-    // console.log(response)
+    console.log(response)
     dispatch({
       type: 'CHANGED_ITEMS_STATUS',
-      payload: response.item
+      payload: response.listItem
     })
   }
   catch (e) {

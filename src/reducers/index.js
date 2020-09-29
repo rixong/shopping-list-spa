@@ -27,7 +27,8 @@ export default function shoppingListReducer(
         loading: false
       }
     case 'USER_CLEARED':
-      return { ...initialState }
+      console.log('Logout in reducer')
+      return { ...state, ...initialState }
 
     case 'ADDED_NEW_LIST':
       return { ...state, lists: state.lists.concat(action.payload) }
@@ -80,7 +81,7 @@ export default function shoppingListReducer(
       return { ...state, loading: true }
     case 'FINISHED_LOADING':
       return { ...state, loading: false }
-      
+
     default:
       return state
   }

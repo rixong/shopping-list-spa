@@ -7,7 +7,7 @@ const Collapse = () => {
   const [collapsed, setCollasped] = useState(true);
 
   return (
-    <div className="row w-75 mx-auto mt-5" >
+    <div className="row mx-auto mt-3" >
       <div className="col">
         <button
           className="btn btn-outline-primary w-100"
@@ -18,10 +18,10 @@ const Collapse = () => {
           aria-expanded="false"
           aria-controls="collapseExample"
         >
-          My Lists {collapsed ? <ChevronDownIcon size={24} /> : <ChevronUpIcon size={24} />}
+          My Lists &nbsp;&nbsp;{collapsed ? <ChevronDownIcon size={24} /> : <ChevronUpIcon size={24} />}
         </button>
         <div className="collapse" id="collapseExample">
-          <div className="card card-body" style={{ backgroundColor: "rgb(210, 210, 210)" }}>
+          <div className="card card-body border-0" style={{ backgroundColor: "rgb(210, 210, 210)" }}>
             <MyLists />
           </div>
         </div>

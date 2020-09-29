@@ -1,27 +1,24 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Navbar from './Navbar';
-import Login from './Login'
+import Login from './Login';
 import Spinner from './Spinner';
-import ListHome from './ListHome'
-import SplitPanels from './SplitPanels'
-
-
+import ListHome from './ListHome';
+import SplitPanels from './SplitPanels';
+import Footer from './Footer';
 
 import { doAutoLogin } from '../actions';
 
 
 const App = ({ loading, curUser, doAutoLogin }) => {
 
-
   useEffect(() => {
     if (localStorage.getItem('jwt') && !curUser) {
       doAutoLogin()
     }
-  }, [doAutoLogin, curUser])
-
+  }, [doAutoLogin, curUser]);
 
   return (
     <Router>
@@ -36,6 +33,7 @@ const App = ({ loading, curUser, doAutoLogin }) => {
               <SplitPanels/>
             </Switch>
           }
+          <Footer />
         </div>
       }
     </Router>

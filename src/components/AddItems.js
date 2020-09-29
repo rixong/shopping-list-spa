@@ -8,12 +8,12 @@ import { doAddItemToMasterList, addNotification, clearNotification } from '../ac
 
 
 const AddItems = ({
-  doAddItemToMasterList, 
-  addNotification, 
-  clearNotification, 
-  masterList, lists, 
-  curUser, 
-  categories, 
+  doAddItemToMasterList,
+  addNotification,
+  clearNotification,
+  masterList, lists,
+  curUser,
+  categories,
   notification }) => {
 
   const curList = lists.find(list => list.id === curUser.currentList)
@@ -69,9 +69,9 @@ const AddItems = ({
   return (
     <React.Fragment>
 
-  <div className="header">Add items to <span className="text-primary">{curList.name}</span> list</div>
+      <div className="header">Add items to <span className="text-primary">{curList.name}</span></div>
       <form>
-        <div className="row mb-5">
+        <div className="row mb-2">
           <div className="col-md-5 mb-3">
             <input
               className="form-control"
@@ -121,25 +121,23 @@ const AddItems = ({
               value={queryTerm.category}
             >
               <option value="0">Category...</option>
-              {categories.sort((a, b) => a.name.localeCompare(b.name)).map(cat => <option value={cat.id} key={cat.id}>{cat.name}</option>)}
+              {categories.sort((a, b) => a.sort_order - b.sort_order).map(cat => <option value={cat.id} key={cat.id}>{cat.name}</option>)}
             </select>
-            <div className="row justify-content-center mt-3">
-              <div className="input-group-append">
-                <button
-                  className="btn btn-primary"
-                  type="button"
-                  id="button-addon2"
-                  onClick={onClickSubmit}
-                >Add item</button>
-              </div>
-            </div>
           </div>
         </div>
 
+        <div className="row justify-content-center my-3">
+          <button
+            className="btn-lg btn-primary w-75"
+            type="button"
+            id="button-addon2"
+            onClick={onClickSubmit}
+          >Add item</button>
+        </div>
 
       </form>
+      <p className="h4 text-warning text-center">&mdash;&mdash;</p>
       {notification.error ? <Alert /> : null}
-      <p className="display-3 text-primary text-center">&mdash;</p>
       <Collapse />
     </React.Fragment>
   )

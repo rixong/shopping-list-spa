@@ -21,8 +21,8 @@ const ListItem = ({ item, doChangeItemStatus, masterList }) => {
   return (
     <li className="list-group-item bg-light py-1 mb-1 h5" role="button" onClick={onHandleClick}>
       <div className={nameClassFinal}>
-        <div className="col">{name}</div>
-        <div className="col border-left">{item.quantity}</div>
+        <div className="col-8">{name}</div>
+        <div className="col-4 border-left">{item.quantity}</div>
         </div>
     </li>
   )

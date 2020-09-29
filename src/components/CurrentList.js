@@ -8,17 +8,17 @@ import ListGroup from './ListGroup'
 
 const CurrentList = ({ curUser, lists, curListItems, masterList, categories, doGetCurrentListItems }) => {
   const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
-  
+
   const curList = lists.find(list => list.id === curUser.currentList)
 
   useEffect(() => {
-    if(curList){
-    doGetCurrentListItems(curList.id)
+    if (curList) {
+      doGetCurrentListItems(curList.id)
     }
   }, [doGetCurrentListItems, curList])
 
 
-  const divideByCategory = () => {
+  const divideListByCategory = () => {
 
     const divided = {};
     let divs = [];
@@ -44,26 +44,12 @@ const CurrentList = ({ curUser, lists, curListItems, masterList, categories, doG
 
   return (
     <div className="col-md overflow-auto bg-light" style={{ height: vh }}>
-      {!curList 
-      ? 
-      <div className="row h2 justify-content-center text-primary mt-4 mb-3 mx-2">
-        Make a new list
-      </div> 
-      : 
-      <div className="row text-primary mt-4 mb-3 mx-2 align-items-end rounded">
-        <div className="col">
-          <div className="h2 pt-2 text-right">
-            {curList.name}
-            </div>
-        </div>
-        <div className="col">
-          <div className="h4 pb-1">{moment(curList.created_at).format('ddd, MMM Do')}</div>
-        </div>
+      <div className="d-flex flex-wrap justify-content-center align-items-end mt-4">
+        <div className="h2 pb-0 text-primary">{curList.name} </div>
+        <div className="h5 ml-4 pb-1"> ({ moment(curList.created_at).format('MMM Do')})</div>
       </div>
 
-  }
-
-      {divideByCategory()}
+      { divideListByCategory()}
 
     </div>
   )
