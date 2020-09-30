@@ -27,8 +27,8 @@ const AddItems = ({
   const onHandleChange = (e) => {
     clearNotification()
     let value = e.target.value
-    setQueryTerm({ ...queryTerm, [e.target.name]: value.toLowerCase()})
-
+    setQueryTerm({ ...queryTerm, [e.target.name]: value.toLowerCase() })
+// console.log(value)
     if (value !== '') {
       setSearchResults(masterList.filter(item => item.name.includes(value)));
     } else {
@@ -70,16 +70,17 @@ const AddItems = ({
   return (
     <React.Fragment>
       <Collapse />
-      <p className="h4 text-warning text-center">&mdash;&mdash;</p>
+
+      {notification.error ? <Alert /> : <p className="h4 text-warning text-center">&mdash;&mdash;</p>}
       <div className="header">Add items to <span className="text-primary">{curList.name}</span></div>
       <form>
         <div className="row mb-2">
-          <div className="col-md-5 mb-3 pr-1">
+          <div className="col-md-5 mb-3 px-1">
             <input
               className="form-control"
               type="text"
               id="name-input"
-              placeholder="Search or add a new item..."
+              placeholder="Add a new item..."
               value={queryTerm.name}
               onChange={(e) => onHandleChange(e)}
               onFocus={() => clearNotification()}
@@ -114,7 +115,7 @@ const AddItems = ({
             ></input>
           </div>
 
-          <div className="col-md-4 pl-1">
+          <div className="col-md-4 px-1">
             <select
               className="form-control"
               onChange={(e) => onHandleChange(e)}
@@ -138,7 +139,6 @@ const AddItems = ({
         </div>
 
       </form>
-      {notification.error ? <Alert /> : null}
     </React.Fragment>
   )
 }

@@ -92,12 +92,12 @@ const MyLists = ({ curUser,
             className="form-control"
             type="text"
             id="list-input"
-            placeholder="list name..."
+            placeholder="List name..."
             value={queryTerm}
             onChange={(e) => onHandleChange(e)}
             onFocus={() => clearNotification()}
             name="name"
-            aria-label="enter list name"
+            aria-label="Enter a list name"
           ></input>
         </div>
         <button 
