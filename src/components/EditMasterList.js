@@ -21,18 +21,18 @@ const EditMasterList = ({ masterList, categories, doRemoveFromMasterList }) => {
       <div className="header">Edit master list</div>
       <div className="h5 text-center">Deleting items here will delete item from ALL of your lists!</div>
       <div className="row justify-content-center">
-        <div className="w-75 d-flex justify-content-between rounded mt-3">
-          <div className="py-2 pl-5" role="button" onClick={() => setSortType('name')}>|NAME|</div>
-          <div className="py-2 pr-5" role="button" onClick={() => setSortType('category')}>|CATEGORY|</div>
+        <div className="d-flex justify-content-between rounded mt-3">
+          <div className="py-2 px-5 hover-btn" role="button" onClick={() => setSortType('name')}>NAME</div>
+          <div className="py-2 px-5 hover-btn"  role="button" onClick={() => setSortType('category')}>CATEGORY</div>
         </div>
-        <ul className="list-group-flush pl-0 mt-3 w-75 rounded" >
+        <div className=" pl-0 mt-3 " >
           {sort().map((item) => (
-            <li
-              className="list-group-item d-flex justify-content-between pl-0 py-1 mb-2 rounded shadow"
+            <div
+              className=" d-flex justify-content-between pl-0 py-1 mb-2 rounded shadow"
               key={item.id}>
-              <div className="col-5">{item.name}</div>
-              <div className="col-5">{(categories.find(el => el.id === item.category_id)).name}</div>
-              <div className="col-2">
+              <div className="ml-3">{item.name.split(' ').map(ele => ele.slice(0,1).toUpperCase() + ele.slice(1).toLowerCase()).join(' ')}</div>
+              <div className="">{(categories.find(el => el.id === item.category_id)).name}</div>
+              <div className="">
                 <button
                   type="button"
                   className="close"
@@ -42,9 +42,9 @@ const EditMasterList = ({ masterList, categories, doRemoveFromMasterList }) => {
                   <XCircleFillIcon size={24} />
                 </button>
               </div>
-            </li>)
+            </div>)
           )}
-        </ul>
+        </div>
       </div>
     </React.Fragment>
   )

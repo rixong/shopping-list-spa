@@ -47,7 +47,16 @@ html {
 
 .strike {
   text-decoration: line-through;
-  color:rgb(167, 167, 167);
+  color: rgb(167, 167, 167);
+}
+
+.hover-btn {
+  /* background-color: darkolivegreen; */
+}
+
+.hover-btn:hover {
+  /* background-color: brown; */
+  font-size: 1.2em;
 }
 
 .category-sort-display {
