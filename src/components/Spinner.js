@@ -2,10 +2,11 @@ import React from 'react';
 
 const Spinner = () => {
   return (
-    <div className="row justify-content-center">
-    <div className="spinner-border text-danger mt-5" role="status">
-      <span className="sr-only">Loading...</span>
-    </div>
+    <div className="text-center">
+      <div className="spinner-border text-danger mt-3" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+      <div className="text-danger">Be patient. Server waking up.</div>
     </div>
   )
 }

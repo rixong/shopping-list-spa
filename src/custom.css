@@ -1,20 +1,19 @@
 html {
   background-color: rgb(191, 191, 191);
-
 }
 
 #root {
- background-color: rgb(191, 191, 191);
+  background-color: rgb(191, 191, 191);
 }
 
-.left-column{
+.left-column {
   background-color: rgb(210, 210, 210);
 }
 
 .header {
   font-size: 2.5em;
   font-weight: 300;
-  margin:10px 0;
+  margin: 10px 0;
   text-align: center;
 }
 
@@ -34,7 +33,7 @@ html {
 .login-switch {
   position: absolute;
   margin: 0 auto;
-  width:100%;
+  width: 100%;
   bottom: 50px;
 }
 
@@ -48,6 +47,7 @@ html {
 
 .strike {
   text-decoration: line-through;
+  color:rgb(167, 167, 167);
 }
 
 .category-sort-display {

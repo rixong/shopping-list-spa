@@ -7,9 +7,8 @@ const baseURL = config.url.API_URL
 // LOGINS / NEW USERS
 
 export const doLogin = (user) => async dispatch => {
-  
+  dispatch({ type: 'STARTED_LOADING' });
   let response;
-  // console.log('from action', user)
   try {
     if (user.password_confirmation) {
       // console.log('New user')
@@ -31,7 +30,7 @@ export const doLogin = (user) => async dispatch => {
   catch (e) {
     console.log('server error', e.message)
   }
-  // dispatch({ type: 'FINISHED_LOADING' });
+  dispatch({ type: 'FINISHED_LOADING' });
 }
 
 

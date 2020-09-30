@@ -27,7 +27,8 @@ const AddItems = ({
   const onHandleChange = (e) => {
     clearNotification()
     let value = e.target.value
-    setQueryTerm({ ...queryTerm, [e.target.name]: value.toLowerCase() })
+    setQueryTerm({ ...queryTerm, [e.target.name]: value.toLowerCase()})
+
     if (value !== '') {
       setSearchResults(masterList.filter(item => item.name.includes(value)));
     } else {
@@ -73,7 +74,7 @@ const AddItems = ({
       <div className="header">Add items to <span className="text-primary">{curList.name}</span></div>
       <form>
         <div className="row mb-2">
-          <div className="col-md-5 mb-3">
+          <div className="col-md-5 mb-3 pr-1">
             <input
               className="form-control"
               type="text"
@@ -92,7 +93,7 @@ const AddItems = ({
                 searchResults.map((item) =>
                   <li
                     key={item.id}
-                    className="list-group-item role"
+                    className="list-group-item py-1"
                     role="button"
                     onClick={(e) => onSelectItem(e)}
                     data-id={item.id}
@@ -100,7 +101,7 @@ const AddItems = ({
                 : null}
             </ul>
           </div>
-          <div className="col-md-3 mb-3">
+          <div className="col-md-3 mb-3 px-1">
             <input
               className="form-control"
               id="quantity-input"
@@ -113,7 +114,7 @@ const AddItems = ({
             ></input>
           </div>
 
-          <div className="col-md-4">
+          <div className="col-md-4 pl-1">
             <select
               className="form-control"
               onChange={(e) => onHandleChange(e)}

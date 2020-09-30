@@ -9,7 +9,7 @@ const Footer = () => {
       alt="Rick Glascock" 
 
     >
-      <div className="text-light text-center my-3" >&#169;2020 Rick Glascock</div> 
+      <div className="text-light text-center py-3" >&#169;2020 Rick Glascock</div> 
     </a>
   )
 }

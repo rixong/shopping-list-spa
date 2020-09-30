@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 
 import { doLogin, clearNotification } from '../actions';
 import Alert from './Alert';
+import Spinner from './Spinner';
 
 
-const Login = ({ notification, doLogin, clearNotification }) => {
+const Login = ({ notification, loading, doLogin, clearNotification }) => {
 
   const inputTextDefault = { email: '', password: '', password_confirmation: '' }
 
@@ -123,6 +124,7 @@ const Login = ({ notification, doLogin, clearNotification }) => {
         </div>
       </form>
           { notification.error ? <Alert/> : null }
+          { loading ? <Spinner/> : null }
 
       <div className="login-switch d-block">
         <p className="text-center">{message[formType]}</p>
@@ -140,7 +142,8 @@ const Login = ({ notification, doLogin, clearNotification }) => {
 
 const mapStateToProps = state => {
   return {
-    notification: state.notification
+    notification: state.notification,
+    loading: state.loading
   }
 };
 

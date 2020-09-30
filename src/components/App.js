@@ -22,10 +22,10 @@ const App = ({ loading, curUser, doAutoLogin }) => {
 
   return (
     <Router>
-      {!curUser && !loading ? <Login /> :
-        <div className="container-fluid bg-dark">
+      {!curUser && !localStorage.getItem('jwt')? <Login /> :
+        <div className="container shadow bg-dark">
           <Navbar />
-          {loading ?
+          {!curUser || loading ?
             <Spinner />
             :
             <Switch>
