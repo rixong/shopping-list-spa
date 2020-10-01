@@ -51,7 +51,7 @@ const MyLists = ({ curUser,
     }
   }
 
-  const defaultClass = "list-group-item d-flex justify-content-between pl-0"
+  const defaultClass = "list-group-item d-flex justify-content-between pl-0 mb-2 rounded shadow"
 
   return (
     <React.Fragment>
@@ -59,7 +59,7 @@ const MyLists = ({ curUser,
       <ul className="list-group">
         {sortedLists.map(list =>
           (<li
-            className={`${defaultClass} ${list.id === curUser.currentList ? 'bg-dark text-info' : 'text-info'}`}
+            className={`${defaultClass} ${list.id === curUser.currentList ? 'bg-dark text-info' : 'text-primary'}`}
             key={list.id}
             role="button"
             onClick={() => onSelectList(list.id)}
